@@ -1,0 +1,47 @@
+/* Sunergon Development Accessibility Color System */
+:root {
+  /* Primary Colors */
+  --sunergon-navy: #002B5B;
+  --sunergon-navy-dark: #001F42; /* Darker for better contrast on light backgrounds */
+  --sunergon-navy-light: #003B7A; /* Lighter for backgrounds and subtle elements */
+  --sunergon-orange: #F37021;
+  --sunergon-orange-dark: #D85A0F; /* Darker for better contrast on light backgrounds */
+  --sunergon-orange-light: #FF8A45; /* Lighter for hover states and subtle elements */
+  
+  /* Text Colors */
+  --text-dark: #1A202C; /* For maximum contrast body text */
+  --text-medium: #374151; /* For standard body text */
+  --text-light: #F8FAFC; /* For text on dark backgrounds */
+  --text-muted-dark: #4B5563; /* For secondary text on light backgrounds */
+  --text-muted-light: #E2E8F0; /* For secondary text on dark backgrounds */
+  
+  /* Background Colors */
+  --bg-light: #FFFFFF;
+  --bg-off-white: #F9FAFB;
+  --bg-light-gray: #F3F4F6;
+  --bg-dark: #002B5B; /* Same as navy for consistency */
+  
+  /* Border and Accent Colors */
+  --border-light: #E5E7EB;
+  --border-medium: #D1D5DB;
+  --border-accent: rgba(243, 112, 33, 0.5); /* Semi-transparent orange */
+
+  /* Overlay Colors for Image Backgrounds */
+  --overlay-dark: rgba(0, 43, 91, 0.8); /* Navy overlay with 80% opacity */
+  --overlay-gradient-dark: linear-gradient(to bottom, rgba(0, 43, 91, 0.4), rgba(0, 43, 91, 0.9));
+  --overlay-gradient-light: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4));
+}
+
+/* Utility Classes for Accessibility */
+.text-shadow-sm {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.text-shadow-md {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.font-readable {
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+}
