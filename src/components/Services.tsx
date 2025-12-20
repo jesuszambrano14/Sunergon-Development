@@ -67,7 +67,7 @@ export function Services() {
   ];
 
   return (
-    <section className="py-32 md:py-40 relative overflow-hidden" id="services">
+    <section className="py-32 md:py-40 relative overflow-hidden mt-24 md:mt-32 pt-32 md:pt-44" id="services">
       {/* Blueprint background pattern */}
       <SectionBackgroundAccents 
         variant="blueprint" 
@@ -75,21 +75,23 @@ export function Services() {
         circlePositions={['bottom-right', 'top-left']} 
         density="sparse"
       />
+      {/* Explicit top spacer to ensure visual separation from previous section */}
+      <div className="h-12 md:h-20"></div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 md:mt-32 mb-16 relative z-10">
         <div className="text-center">
           <div className="inline-block px-4 py-2 bg-white rounded-full shadow-sm mb-6">
             <span className="text-[#001F42] text-sm font-semibold">Our Services</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-[#001F42] mb-6 leading-tight">Construction Excellence</h2>
-          <div className="w-24 h-1 bg-[#F37021] mx-auto mb-8"></div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-normal mt-4 mb-24">
+          <div className="w-24 h-1 bg-[#F37021] mx-auto mb-10 md:mb-12"></div>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-normal mt-6 mb-32 md:mb-40">
             Specialized construction services delivered with precision, safety, and long-term performance.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="max-w-6xl mx-auto mb-32">
+        <div className="max-w-6xl mx-auto mb-48 md:mb-56">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => {
               const Icon = service.icon;
@@ -111,9 +113,12 @@ export function Services() {
               );
             })}
           </div>
-          
+
+          {/* Extra spacer to separate the grid from the CTA */}
+          <div className="h-12 md:h-20"></div>
+
           {/* CTA Section */}
-          <div className="mt-28 pt-16 border-t border-gray-200">
+          <div className="mt-64 md:mt-80 pt-24 border-t border-gray-200">
             <div className="text-center max-w-3xl mx-auto">
               <p className="text-xl text-gray-600 mb-12">Need a contractor experienced in commercial and public projects?</p>
               <div className="flex flex-col sm:flex-row gap-8 justify-center">

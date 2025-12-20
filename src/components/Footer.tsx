@@ -1,10 +1,11 @@
 import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail, Clock, ArrowRight, Globe, ChevronRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 const logo = new URL("../images/sunergondev-01-removebg-preview.png", import.meta.url).href;
 import SectionBackgroundAccents from "./ui/SectionBackground";
 
 export function Footer() {
+  const location = useLocation();
   const quickLinks = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
@@ -30,42 +31,44 @@ export function Footer() {
 
   return (
     <div>
-      {/* CTA Banner - Kept separate from the footer */}
-      <section className="bg-white py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden reveal fade-up once">
-            <div className="grid grid-cols-1 md:grid-cols-3 items-center">
-              <div className="p-8 md:p-10 md:col-span-2">
-                <h2 className="text-2xl md:text-3xl font-bold text-[#002B5B] mb-4">Ready to Start Your Project?</h2>
-                <p className="text-gray-700 mb-6">Connect with our team for expert construction solutions tailored to your needs</p>
-                <Link to="/contact">
-                  <Button className="bg-[#F37021] hover:bg-[#F37021]/90 text-white px-8 py-3 shadow-md hover:shadow-lg transition-all group">
-                    Request a Consultation
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </div>
-              <div className="hidden md:block h-full bg-gradient-to-r from-[#F37021]/10 to-[#F37021]/30 p-10">
-                <div className="space-y-4">
-                  {[
-                    "Expert consultations",
-                    "Detailed project estimates",
-                    "Quality craftsmanship",
-                    "On-time delivery",
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-[#F37021] flex items-center justify-center flex-shrink-0">
-                        <ChevronRight className="w-3 h-3 text-white" />
+      {/* CTA Banner - Kept separate from the footer (hidden on About page) */}
+      {location.pathname !== '/about' && location.pathname !== '/projects' && (
+        <section className="bg-white py-20 md:py-28">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-[#002B5B] text-white rounded-2xl shadow-xl border border-[#002B5B] overflow-hidden reveal fade-up once">
+              <div className="grid grid-cols-1 md:grid-cols-3 items-center">
+                <div className="p-8 md:p-10 md:col-span-2">
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Start Your Project?</h2>
+                  <p className="text-gray-200 mb-6">Connect with our team for expert construction solutions tailored to your needs</p>
+                  <Link to="/contact">
+                    <Button className="bg-[#F37021] hover:bg-[#F37021]/90 text-white px-8 py-3 shadow-md hover:shadow-lg transition-all group">
+                      Request a Consultation
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                </div>
+                <div className="hidden md:block h-full bg-gradient-to-r from-white/10 to-white/5 p-10">
+                  <div className="space-y-4">
+                    {[
+                      "Expert consultations",
+                      "Detailed project estimates",
+                      "Quality craftsmanship",
+                      "On-time delivery",
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-3">
+                        <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                          <ChevronRight className="w-3 h-3 text-white" />
+                        </div>
+                        <span className="text-white font-medium">{item}</span>
                       </div>
-                      <span className="text-[#002B5B] font-medium">{item}</span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
         
       {/* Footer - Separate from CTA */}
       <footer className="relative overflow-hidden border-t border-gray-200 bg-gradient-to-t from-[#F37021]/40 via-[#F37021]/15 to-white">

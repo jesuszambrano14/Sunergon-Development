@@ -256,35 +256,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-[#002B5B] to-[#002B5B]/90 text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-[#F37021] rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-white mb-6">Ready to Start Your Project?</h2>
-          <p className="text-xl text-gray-200 mb-8">
-            Let's discuss how we can bring your construction vision to life with our expertise and commitment to excellence.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg"
-              className="bg-[#F37021] hover:bg-[#F37021]/90 text-white shadow-lg shadow-[#F37021]/20 gap-2"
-            >
-              Request a Quote
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-            <Button 
-              size="lg"
-              variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-[#002B5B] transition-all"
-            >
-              View Our Projects
-            </Button>
-          </div>
-        </div>
-      </section>
+    
     </div>
   );
 }
