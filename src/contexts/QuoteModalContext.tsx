@@ -36,7 +36,7 @@ export function QuoteModalProvider({ children }: QuoteModalProviderProps) {
   return (
     <QuoteModalContext.Provider value={{ isOpen, openModal, closeModal }}>
       {children}
-      <Modal isOpen={isOpen} onClose={closeModal} title="Request a Project Quote" size="xl">
+      <Modal isOpen={isOpen} onClose={closeModal} title="Request a Project Quote" size="3xl">
         <GetQuoteForm />
       </Modal>
     </QuoteModalContext.Provider>

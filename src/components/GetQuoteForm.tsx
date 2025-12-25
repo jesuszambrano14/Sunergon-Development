@@ -4,6 +4,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { CheckCircle2 } from 'lucide-react';
+import { useQuoteModal } from '../contexts/QuoteModalContext';
 
 interface QuoteFormData {
   fullName: string;
@@ -27,6 +28,7 @@ interface QuoteFormErrors {
 }
 
 export function GetQuoteForm() {
+  const { closeModal } = useQuoteModal();
   const [formData, setFormData] = useState<QuoteFormData>({
     fullName: '',
     companyName: '',
@@ -175,6 +177,11 @@ export function GetQuoteForm() {
         setIsSubmitting(false);
         setSubmitSuccess(true);
 
+        // Auto-close modal after showing success briefly
+        setTimeout(() => {
+          closeModal();
+        }, 2500);
+
         // Reset form after successful submission
         setTimeout(() => {
           setSubmitSuccess(false);
@@ -197,7 +204,7 @@ export function GetQuoteForm() {
   };
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden">
+    <div className="bg-white">
       {submitSuccess ? (
         <div className="p-8 text-center">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -215,10 +222,10 @@ export function GetQuoteForm() {
         <form onSubmit={handleSubmit} className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
             {/* Left Column - Contact Information */}
-            <div className="space-y-6 md:border-r border-gray-100 md:pr-6">
-              <h3 className="text-lg font-bold text-[#001F42] mb-4">Contact Information</h3>
+            <div className="space-y-4 md:border-r border-gray-100 md:pr-6">
+              <h3 className="text-lg font-bold text-[#001F42] mb-2">Contact Information</h3>
               
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="fullName" className="font-medium text-[#001F42]">
                   Full Name <span className="text-red-500">*</span>
                 </Label>
@@ -232,7 +239,7 @@ export function GetQuoteForm() {
                 {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="companyName" className="font-medium text-[#001F42]">
                   Company Name <span className="text-gray-500 text-xs">(optional)</span>
                 </Label>
@@ -245,7 +252,7 @@ export function GetQuoteForm() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="email" className="font-medium text-[#001F42]">
                   Email <span className="text-red-500">*</span>
                 </Label>
@@ -260,7 +267,7 @@ export function GetQuoteForm() {
                 {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="phone" className="font-medium text-[#001F42]">
                   Phone <span className="text-red-500">*</span>
                 </Label>
@@ -278,10 +285,10 @@ export function GetQuoteForm() {
             </div>
 
             {/* Right Column - Project Details */}
-            <div className="space-y-6">
-              <h3 className="text-lg font-bold text-[#001F42] mb-4">Project Details</h3>
+            <div className="space-y-4">
+              <h3 className="text-lg font-bold text-[#001F42] mb-2">Project Details</h3>
               
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="projectLocation" className="font-medium text-[#001F42]">
                   Project Location <span className="text-red-500">*</span>
                 </Label>
@@ -296,7 +303,7 @@ export function GetQuoteForm() {
                 {errors.projectLocation && <p className="text-red-500 text-xs mt-1">{errors.projectLocation}</p>}
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="projectType" className="font-medium text-[#001F42]">
                   Project Type <span className="text-red-500">*</span>
                 </Label>
@@ -305,7 +312,7 @@ export function GetQuoteForm() {
                   name="projectType"
                   value={formData.projectType}
                   onChange={handleInputChange}
-                  className="w-full rounded-md border-gray-200 focus:border-[#F37021] focus:ring-[#F37021] h-10"
+                  className="w-full rounded-md border-gray-200 focus:border-[#F37021] focus:ring-[#F37021] h-10 border"
                 >
                   {projectTypeOptions.map(option => (
                     <option key={option} value={option}>{option}</option>
@@ -313,11 +320,11 @@ export function GetQuoteForm() {
                 </select>
               </div>
 
-              <div className="space-y-2">
-                <Label className="font-medium text-[#001F42] block mb-2">
+              <div className="space-y-1.5">
+                <Label className="font-medium text-[#001F42] block mb-1">
                   Services Needed
                 </Label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
                   {serviceOptions.map(service => (
                     <div key={service} className="flex items-center">
                       <input
@@ -327,7 +334,7 @@ export function GetQuoteForm() {
                         onChange={() => handleCheckboxChange(service)}
                         className="rounded border-gray-300 text-[#F37021] focus:ring-[#F37021] mr-2 h-4 w-4"
                       />
-                      <Label htmlFor={`service-${service}`} className="cursor-pointer">
+                      <Label htmlFor={`service-${service}`} className="cursor-pointer text-sm">
                         {service}
                       </Label>
                     </div>
@@ -343,7 +350,7 @@ export function GetQuoteForm() {
                 )}
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="projectTimeline" className="font-medium text-[#001F42]">
                   Project Timeline
                 </Label>
@@ -352,7 +359,7 @@ export function GetQuoteForm() {
                   name="projectTimeline"
                   value={formData.projectTimeline}
                   onChange={handleInputChange}
-                  className="w-full rounded-md border-gray-200 focus:border-[#F37021] focus:ring-[#F37021] h-10"
+                  className="w-full rounded-md border-gray-200 focus:border-[#F37021] focus:ring-[#F37021] h-10 border"
                 >
                   {timelineOptions.map(option => (
                     <option key={option} value={option}>{option}</option>
@@ -377,7 +384,7 @@ export function GetQuoteForm() {
           </div>
 
           {/* Full Width - Message */}
-          <div className="mt-6 space-y-2">
+          <div className="mt-4 space-y-1.5">
             <Label htmlFor="message" className="font-medium text-[#001F42]">
               Project Description <span className="text-red-500">*</span>
             </Label>
@@ -394,8 +401,8 @@ export function GetQuoteForm() {
           </div>
 
           {/* File Upload */}
-          <div className="mt-6">
-            <Label className="font-medium text-[#001F42] block mb-2">
+          <div className="mt-4">
+            <Label className="font-medium text-[#001F42] block mb-1.5">
               Upload Plans or Drawings <span className="text-gray-500 text-xs">(optional)</span>
             </Label>
             <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center">
@@ -419,7 +426,7 @@ export function GetQuoteForm() {
           </div>
 
           {/* Submit Button */}
-          <div className="mt-8">
+          <div className="mt-6">
             <Button
               type="submit"
               disabled={isSubmitting}
