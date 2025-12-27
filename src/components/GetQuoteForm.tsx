@@ -219,14 +219,14 @@ export function GetQuoteForm() {
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+        <form onSubmit={handleSubmit} className="p-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-8">
             {/* Left Column - Contact Information */}
-            <div className="space-y-4 md:border-r border-gray-100 md:pr-6">
-              <h3 className="text-lg font-bold text-[#001F42] mb-2">Contact Information</h3>
+            <div className="space-y-6 md:border-r border-gray-100 md:pr-16">
+              <h3 className="text-xl font-bold text-[#001F42] mb-6 border-b border-gray-50 pb-2">Contact Information</h3>
               
-              <div className="space-y-1.5">
-                <Label htmlFor="fullName" className="font-medium text-[#001F42]">
+              <div className="space-y-2.5">
+                <Label htmlFor="fullName" className="font-semibold text-[#001F42] text-sm">
                   Full Name <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -239,9 +239,9 @@ export function GetQuoteForm() {
                 {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="companyName" className="font-medium text-[#001F42]">
-                  Company Name <span className="text-gray-500 text-xs">(optional)</span>
+              <div className="space-y-2.5">
+                <Label htmlFor="companyName" className="font-semibold text-[#001F42] text-sm">
+                  Company Name <span className="text-gray-500 text-xs font-normal ml-1">(optional)</span>
                 </Label>
                 <Input
                   id="companyName"
@@ -252,8 +252,8 @@ export function GetQuoteForm() {
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="email" className="font-medium text-[#001F42]">
+              <div className="space-y-2.5">
+                <Label htmlFor="email" className="font-semibold text-[#001F42] text-sm">
                   Email <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -267,8 +267,8 @@ export function GetQuoteForm() {
                 {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="phone" className="font-medium text-[#001F42]">
+              <div className="space-y-2.5">
+                <Label htmlFor="phone" className="font-semibold text-[#001F42] text-sm">
                   Phone <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -285,11 +285,11 @@ export function GetQuoteForm() {
             </div>
 
             {/* Right Column - Project Details */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold text-[#001F42] mb-2">Project Details</h3>
+            <div className="space-y-6">
+              <h3 className="text-xl font-bold text-[#001F42] mb-6 border-b border-gray-50 pb-2">Project Details</h3>
               
-              <div className="space-y-1.5">
-                <Label htmlFor="projectLocation" className="font-medium text-[#001F42]">
+              <div className="space-y-2.5">
+                <Label htmlFor="projectLocation" className="font-semibold text-[#001F42] text-sm">
                   Project Location <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -303,8 +303,8 @@ export function GetQuoteForm() {
                 {errors.projectLocation && <p className="text-red-500 text-xs mt-1">{errors.projectLocation}</p>}
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="projectType" className="font-medium text-[#001F42]">
+              <div className="space-y-2.5">
+                <Label htmlFor="projectType" className="font-semibold text-[#001F42] text-sm">
                   Project Type <span className="text-red-500">*</span>
                 </Label>
                 <select
@@ -320,11 +320,11 @@ export function GetQuoteForm() {
                 </select>
               </div>
 
-              <div className="space-y-1.5">
-                <Label className="font-medium text-[#001F42] block mb-1">
+              <div className="space-y-3">
+                <Label className="font-semibold text-[#001F42] text-sm block mb-1">
                   Services Needed
                 </Label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {serviceOptions.map(service => (
                     <div key={service} className="flex items-center">
                       <input
@@ -350,8 +350,8 @@ export function GetQuoteForm() {
                 )}
               </div>
 
-              <div className="space-y-1.5">
-                <Label htmlFor="projectTimeline" className="font-medium text-[#001F42]">
+              <div className="space-y-2.5">
+                <Label htmlFor="projectTimeline" className="font-semibold text-[#001F42] text-sm">
                   Project Timeline
                 </Label>
                 <select
@@ -367,9 +367,9 @@ export function GetQuoteForm() {
                 </select>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="projectBudget" className="font-medium text-[#001F42]">
-                  Approximate Budget <span className="text-gray-500 text-xs">(optional)</span>
+              <div className="space-y-2.5">
+                <Label htmlFor="projectBudget" className="font-semibold text-[#001F42] text-sm">
+                  Approximate Budget <span className="text-gray-500 text-xs font-normal ml-1">(optional)</span>
                 </Label>
                 <Input
                   id="projectBudget"
@@ -384,8 +384,8 @@ export function GetQuoteForm() {
           </div>
 
           {/* Full Width - Message */}
-          <div className="mt-4 space-y-1.5">
-            <Label htmlFor="message" className="font-medium text-[#001F42]">
+          <div className="mt-10 space-y-3">
+            <Label htmlFor="message" className="font-semibold text-[#001F42] text-sm">
               Project Description <span className="text-red-500">*</span>
             </Label>
             <Textarea
@@ -401,9 +401,9 @@ export function GetQuoteForm() {
           </div>
 
           {/* File Upload */}
-          <div className="mt-4">
-            <Label className="font-medium text-[#001F42] block mb-1.5">
-              Upload Plans or Drawings <span className="text-gray-500 text-xs">(optional)</span>
+          <div className="mt-10">
+            <Label className="font-semibold text-[#001F42] text-sm block mb-3">
+              Upload Plans or Drawings <span className="text-gray-500 text-xs font-normal ml-1">(optional)</span>
             </Label>
             <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center">
               <input

@@ -1,10 +1,12 @@
 import { MapPin, Calendar, Building2, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-// Using placeholder images since the imports are causing errors
-const imgKilgoreFS = "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXJlJTIwc3RhdGlvbnxlbnwxfHx8fDE3MDQyMzIzOTJ8MA&ixlib=rb-4.1.0&q=80";
-const imgKilgoreFOC = "https://images.unsplash.com/photo-1503387837-b154d5074bd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvcGVyYXRpb24lMjBjZW50ZXJ8ZW58MXx8fHwxNzA0MjMyMzkyfjA&ixlib=rb-4.1.0&q=80";
-const imgMelissa6 = "https://images.unsplash.com/photo-1543465077-db45d34b88a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdXRvJTIwcmVwYWlyfGVufDF8fHx8MTcwNDIzMjM5Mnww&ixlib=rb-4.1.0&q=80";
+import imgKilgoreFS from "../images/Kilgore Fs/3-DJI_20250903101825_0017_D.jpg";
+import imgKilgoreFOC from "../images/Kilgore FOC/16-DJI_20250916121623_0036_D.jpg";
+import imgMelissa6 from "../images/Melissa/melissa6.jpeg";
+import img1008Devonshire from "../images/1008 Devonshire/1008Devonshire.jpeg";
+import img1014Devonshire from "../images/1014 Devonshire/1014Devonshire.jpeg";
+import imgStonecrest from "../images/2703 Stonecrest/StoneCrest.jpeg";
 import { useRef } from "react";
 import SectionBackgroundAccents from "./ui/SectionBackground";
 
@@ -40,7 +42,7 @@ export function Projects() {
       scope: ["Site preparation", "Foundation work", "Utility installation", "Concrete paving"]
     },
     {
-      image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1080&q=80&auto=format&fit=crop",
+      image: img1008Devonshire,
       title: "1008 Devonshire in Forney",
       category: "Residential",
       location: "Forney, TX",
@@ -49,7 +51,7 @@ export function Projects() {
       scope: ["Grading", "Utility connections", "Street paving", "Drainage systems"]
     },
     {
-      image: "https://images.unsplash.com/photo-1600596542815-7c2b59f3a0b0?w=1080&q=80&auto=format&fit=crop",
+      image: img1014Devonshire,
       title: "1014 Devonshire in Forney",
       category: "Residential",
       location: "Forney, TX",
@@ -58,7 +60,7 @@ export function Projects() {
       scope: ["Site preparation", "Utility installation", "Concrete work", "Final grading"]
     },
     {
-      image: "https://images.unsplash.com/photo-1581093458791-9d09a83d67b2?w=1080&q=80&auto=format&fit=crop",
+      image: imgStonecrest,
       title: "2703 Stonecrest in Sherman",
       category: "Industrial",
       location: "Sherman, TX",
@@ -142,25 +144,13 @@ export function Projects() {
 
         {/* CTA Buttons with increased spacing */}
         <div className="mt-20 pt-12 border-t border-gray-100 text-center max-w-xl mx-auto">
-          <Link to="/projects" className="inline-block mb-6">
-            <Button 
-              variant="outline"
-              className="border-2 border-[#002B5B] text-[#001F42] hover:bg-[#002B5B] hover:text-white transition-colors duration-200 px-8 py-3 group font-medium"
-            >
-              Load More Projects
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          {/* View All Projects Button */}
+          <Link to="/projects">
+            <Button className="bg-[#F37021] hover:bg-[#D85A0F] text-white shadow-lg shadow-[#F37021]/20 hover:shadow-xl transition-colors duration-200 px-8 py-3.5 group font-medium">
+              View Full Portfolio
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </Link>
-          
-          {/* View All Projects Button */}
-          <div className="mt-6 text-center">
-            <Link to="/projects">
-              <Button className="bg-[#F37021] hover:bg-[#D85A0F] text-white shadow-lg shadow-[#F37021]/20 hover:shadow-xl transition-colors duration-200 px-8 py-3.5 group font-medium">
-                View Full Portfolio
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </div>
         </div>
         
         

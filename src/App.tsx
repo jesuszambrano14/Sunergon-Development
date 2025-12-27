@@ -67,6 +67,11 @@ export default function App() {
   // Re-run reveal setup on route changes so animations work after navigation
   const location = useLocation();
   useScrollReveal(location.pathname);
+
+  // Scroll to top on route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   
   return (
     <QuoteModalProvider>

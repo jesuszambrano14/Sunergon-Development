@@ -147,7 +147,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
     >
       <div 
         ref={modalContentRef}
-        className={`bg-white rounded-xl shadow-2xl ${sizeClasses[size]} w-full flex flex-col overflow-hidden transform transition-transform duration-200 ${animateIn ? 'scale-100 translate-y-0' : 'scale-95 translate-y-2'}`}
+        className={`bg-white rounded-xl shadow-2xl ${sizeClasses[size]} w-28 flex flex-col overflow-hidden transform transition-transform duration-200 ${animateIn ? 'scale-100 translate-y-0' : 'scale-95 translate-y-2'}`}
         style={{ maxHeight: '92vh' }}
         onClick={(e) => e.stopPropagation()}
       >

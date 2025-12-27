@@ -4,6 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import imgKilgoreFS from "../images/Kilgore Fs/3-DJI_20250903101825_0017_D.jpg";
 import imgKilgoreFOC from "../images/Kilgore FOC/16-DJI_20250916121623_0036_D.jpg";
 import imgMelissa6 from "../images/Melissa/melissa6.jpeg";
+import img1008Devonshire from "../images/1008 Devonshire/1008Devonshire.jpeg";
+import img1014Devonshire from "../images/1014 Devonshire/1014Devonshire.jpeg";
+import imgStonecrest from "../images/2703 Stonecrest/StoneCrest.jpeg";
 
 function Counter({ end, duration = 2000, suffix = "", prefix = "", startDelay = 0 }: { end: number; duration?: number; suffix?: string; prefix?: string; startDelay?: number }) {
   const elRef = useRef<HTMLSpanElement | null>(null);
@@ -102,7 +105,7 @@ export function ProjectsPage() {
       status: "Completed"
     },
     {
-      image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1080&q=80&auto=format&fit=crop",
+      image: img1008Devonshire,
       title: "1008 Devonshire",
       category: "residential",
       categoryLabel: "Residential",
@@ -115,7 +118,7 @@ export function ProjectsPage() {
       status: "Completed"
     },
     {
-      image: "https://images.unsplash.com/photo-1600596542815-7c2b59f3a0b0?w=1080&q=80&auto=format&fit=crop",
+      image: img1014Devonshire,
       title: "1014 Devonshire",
       category: "residential",
       categoryLabel: "Residential",
@@ -128,7 +131,7 @@ export function ProjectsPage() {
       status: "Completed"
     },
     {
-      image: "https://images.unsplash.com/photo-1581093458791-9d09a83d67b2?w=1080&q=80&auto=format&fit=crop",
+      image: imgStonecrest,
       title: "2703 Stonecrest",
       category: "commercial",
       categoryLabel: "Commercial Development",
