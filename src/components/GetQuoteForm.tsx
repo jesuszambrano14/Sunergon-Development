@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Label, Select, TextInput, Textarea, HelperText } from 'flowbite-react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
 import { CheckCircle2, Send } from 'lucide-react';
-import { useQuoteModal } from '../contexts/QuoteModalContext';
+import { FormField, inputStyles, checkboxGroupStyles, checkboxItemStyles } from './ui/form-field';
+import { CustomSelect } from './ui/custom-select';
+import '../styles/select-fix.css';
 
 interface QuoteFormData {
   fullName: string;
@@ -37,8 +40,7 @@ export function GetQuoteForm() {
   const [formData, setFormData] = useState<QuoteFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof QuoteFormData, string>>>({});
-  const [otherService, setOtherService] = useState('');
+  const [errors, setErrors] = useState<Partial<Record<keyof QuoteFormData, string>>>({}); 
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -68,7 +70,6 @@ export function GetQuoteForm() {
     }
     if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
     if (!formData.projectLocation.trim()) newErrors.projectLocation = 'Location is required';
-    if (!formData.message.trim()) newErrors.message = 'Project description is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -86,9 +87,9 @@ export function GetQuoteForm() {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800">
+    <div className="bg-white">
       {submitSuccess ? (
-        <div className="p-12 text-center space-y-4">
+        <div className="p-12 text-center space-y-4 rounded-xl">
           <div className="mx-auto w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4">
             <CheckCircle2 size={32} />
           </div>
@@ -98,79 +99,91 @@ export function GetQuoteForm() {
           </p>
           <Button 
             onClick={() => setSubmitSuccess(false)}
-            className="mx-auto bg-[#001F42] hover:bg-[#002B5B] border-none"
+            className="mx-auto h-10 bg-[#F37021] hover:bg-[#F37021]/90 text-white shadow-lg shadow-[#F37021]/20 hover:shadow-xl hover:shadow-[#F37021]/30 transition-all gap-2 text-sm"
           >
             Send Another Request
           </Button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="p-8 md:p-12">
+        <form onSubmit={handleSubmit} className="p-8 md:p-10 space-y-8">
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 lg:gap-20">
             {/* Left Column - Contact Information */}
-            <div className="w-full md:w-[46%] flex flex-col space-y-8">
-              <h3 className="text-lg font-bold text-[#001F42] dark:text-white border-b border-gray-100 pb-3">Contact Information</h3>
+            <div className="w-full md:w-[46%] flex flex-col space-y-6">
+              <h3 className="text-lg font-bold text-[#002B5B] border-b border-gray-100 pb-3 mb-5">Contact Information</h3>
               
-              <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-sm font-semibold text-gray-700">Full Name *</Label>
-                <div className="max-w-[380px]">
-                  <TextInput
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Full Name"
+                  htmlFor="fullName"
+                  required
+                  error={errors.fullName}
+                >
+                  <Input
                     id="fullName"
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    color={errors.fullName ? 'failure' : 'gray'}
+                    className={inputStyles}
                     placeholder="John Doe"
                     required
                   />
-                  {errors.fullName && <HelperText color="failure">{errors.fullName}</HelperText>}
-                </div>
+                </FormField>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="companyName" className="text-sm font-semibold text-gray-700">Company Name (optional)</Label>
-                <div className="max-w-[380px]">
-                  <TextInput
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Company Name (optional)"
+                  htmlFor="companyName"
+                >
+                  <Input
                     id="companyName"
                     name="companyName"
                     value={formData.companyName}
                     onChange={handleInputChange}
+                    className={inputStyles}
                     placeholder="Company Ltd."
                   />
-                </div>
+                </FormField>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-semibold text-gray-700">Email Address *</Label>
-                <div className="max-w-[380px]">
-                  <TextInput
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Email Address"
+                  htmlFor="email"
+                  required
+                  error={errors.email}
+                >
+                  <Input
                     id="email"
                     name="email"
                     type="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    color={errors.email ? 'failure' : 'gray'}
+                    className={inputStyles}
                     placeholder="john@example.com"
                     required
                   />
-                  {errors.email && <HelperText color="failure">{errors.email}</HelperText>}
-                </div>
+                </FormField>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">Phone Number *</Label>
-                <div className="max-w-[380px]">
-                  <TextInput
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Phone Number"
+                  htmlFor="phone"
+                  required
+                  error={errors.phone}
+                >
+                  <Input
                     id="phone"
                     name="phone"
                     type="tel"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    color={errors.phone ? 'failure' : 'gray'}
+                    className={inputStyles}
                     placeholder="(123) 456-7890"
                     required
                   />
-                  {errors.phone && <HelperText color="failure">{errors.phone}</HelperText>}
-                </div>
+                </FormField>
               </div>
             </div>
 
@@ -178,123 +191,124 @@ export function GetQuoteForm() {
             <div className="hidden md:block w-px self-stretch bg-gray-100 mt-16"></div>
 
             {/* Right Column - Project Details */}
-            <div className="w-full md:w-[46%] flex flex-col space-y-8">
-              <h3 className="text-lg font-bold text-[#001F42] dark:text-white border-b border-gray-100 pb-3">Project Details</h3>
+            <div className="w-full md:w-[46%] flex flex-col space-y-6">
+              <h3 className="text-lg font-bold text-[#002B5B] border-b border-gray-100 pb-3 mb-5">Project Details</h3>
               
-              <div className="space-y-2">
-                <Label htmlFor="projectLocation" className="text-sm font-semibold text-gray-700">Project Location *</Label>
-                <div className="max-w-[380px]">
-                  <TextInput
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Project Location"
+                  htmlFor="projectLocation"
+                  required
+                  error={errors.projectLocation}
+                >
+                  <Input
                     id="projectLocation"
                     name="projectLocation"
                     value={formData.projectLocation}
                     onChange={handleInputChange}
-                    color={errors.projectLocation ? 'failure' : 'gray'}
+                    className={inputStyles}
                     placeholder="City, State"
                     required
                   />
-                  {errors.projectLocation && <HelperText color="failure">{errors.projectLocation}</HelperText>}
-                </div>
+                </FormField>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="projectType" className="text-sm font-semibold text-gray-700">Project Type *</Label>
-                <div className="max-w-[380px]">
-                  <Select
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Project Type"
+                  htmlFor="projectType"
+                  required
+                >
+                  <CustomSelect
                     id="projectType"
-                    name="projectType"
+                    options={projectTypeOptions.length > 0 ? projectTypeOptions : ['Commercial', 'Industrial', 'Residential', 'Public/Government', 'Other']}
                     value={formData.projectType}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    {projectTypeOptions.map(option => (
-                      <option key={option} value={option}>{option}</option>
+                    onChange={(value: string) => {
+                      const e = { target: { name: 'projectType', value } };
+                      handleInputChange(e as React.ChangeEvent<HTMLSelectElement>);
+                    }}
+                    placeholder="Select project type"
+                  />
+                </FormField>
+              </div>
+
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Services Needed"
+                >
+                  <div className={checkboxGroupStyles}>
+                    {serviceOptions.map(service => (
+                      <label 
+                        key={service} 
+                        className={checkboxItemStyles}
+                        htmlFor={`service-${service}`}
+                      >
+                        <input
+                          type="checkbox"
+                          id={`service-${service}`}
+                          checked={formData.servicesNeeded.includes(service)}
+                          onChange={() => handleCheckboxChange(service)}
+                          className="h-4 w-4 rounded border-gray-300 text-[#F37021] focus:ring-[#F37021] focus:ring-opacity-30"
+                        />
+                        <span className="cursor-pointer text-sm text-gray-600">
+                          {service}
+                        </span>
+                      </label>
                     ))}
-                  </Select>
-                </div>
+                  </div>
+                </FormField>
               </div>
 
-              <div className="space-y-4">
-                <Label className="text-sm font-semibold text-gray-700">Services Needed</Label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-gray-50 rounded-xl">
-                  {serviceOptions.map(service => (
-                    <div key={service} className="flex items-center gap-2">
-                      <Checkbox
-                        id={`service-${service}`}
-                        checked={formData.servicesNeeded.includes(service)}
-                        onChange={() => handleCheckboxChange(service)}
-                      />
-                      <Label htmlFor={`service-${service}`} className="cursor-pointer text-sm font-medium text-gray-600">
-                        {service}
-                      </Label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="projectTimeline" className="text-sm font-semibold text-gray-700">Project Timeline</Label>
-                <div className="max-w-[380px]">
-                  <Select
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Project Timeline"
+                  htmlFor="projectTimeline"
+                >
+                  <CustomSelect
                     id="projectTimeline"
-                    name="projectTimeline"
+                    options={timelineOptions.length > 0 ? timelineOptions : ['As soon as possible', 'Within 1-3 months', 'Within 3-6 months', '6+ months', 'Flexible']}
                     value={formData.projectTimeline}
-                    onChange={handleInputChange}
-                  >
-                    {timelineOptions.map(option => (
-                      <option key={option} value={option}>{option}</option>
-                    ))}
-                  </Select>
-                </div>
+                    onChange={(value: string) => {
+                      const e = { target: { name: 'projectTimeline', value } };
+                      handleInputChange(e as React.ChangeEvent<HTMLSelectElement>);
+                    }}
+                    placeholder="Select timeline"
+                  />
+                </FormField>
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="projectBudget" className="text-sm font-semibold text-gray-700">Approximate Budget (optional)</Label>
-                <div className="max-w-[380px]">
-                  <TextInput
+              <div className="max-w-[380px] mb-4">
+                <FormField
+                  label="Approximate Budget (optional)"
+                  htmlFor="projectBudget"
+                >
+                  <Input
                     id="projectBudget"
                     name="projectBudget"
                     value={formData.projectBudget}
                     onChange={handleInputChange}
+                    className={inputStyles}
                     placeholder="$ 0.00"
                   />
-                </div>
+                </FormField>
               </div>
             </div>
           </div>
 
-          {/* Full Width - Message */}
-          <div className="mt-12 space-y-3">
-            <Label htmlFor="message" className="text-lg font-bold text-[#001F42]">Project Description *</Label>
-            <Textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleInputChange}
-              rows={4}
-              color={errors.message ? 'failure' : 'gray'}
-              className="resize-none rounded-xl"
-              placeholder="Tell us more about your project..."
-              required
-            />
-            {errors.message && <HelperText color="failure">{errors.message}</HelperText>}
-          </div>
 
           {/* Submit Button */}
-          <div className="mt-10">
+          <div className="mt-12 pt-6 pb-2 border-t border-gray-100 bg-gray-50/50 -mx-8 md:-mx-10 px-8 md:px-10 rounded-b-xl">
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-[#F37021] hover:bg-[#D85A0F] enabled:hover:bg-[#D85A0F] border-none text-white py-3 text-lg font-bold shadow-md transition-all"
+              className="w-full h-10 bg-[#F37021] hover:bg-[#F37021]/90 text-white shadow-lg shadow-[#F37021]/20 hover:shadow-xl hover:shadow-[#F37021]/30 transition-all gap-2 text-sm"
             >
-              <div className="flex items-center justify-center gap-2">
-                {isSubmitting ? 'Sending Request...' : (
-                  <>
-                    <Send size={18} />
-                    <span>Request a Quote</span>
-                  </>
-                )}
-              </div>
+              {isSubmitting ? 'Sending Request...' : (
+                <>
+                  <Send className="w-5 h-5" />
+                  Request a Quote
+                </>
+              )}
             </Button>
           </div>
         </form>

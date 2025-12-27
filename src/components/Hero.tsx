@@ -1,7 +1,8 @@
 import { Button } from "./ui/button";
-import { ArrowRight, Award, Users, Briefcase, Check } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import { ArrowRight, Award, Check } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useQuoteModal } from "../contexts/QuoteModalContext";
+import { Link } from "react-router-dom";
 // Using placeholder image since the import is causing an error
 const imgKilgoreFOCFirst = "https://images.unsplash.com/photo-1503387837-b154d5074bd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBzaXRlfGVufDF8fHx8MTcwNDIzMjM5Mnww&ixlib=rb-4.1.0&q=80";
 import SectionBackgroundAccents from "./ui/SectionBackground";
@@ -101,8 +102,11 @@ export function Hero() {
                 size="lg" 
                 variant="outline"
                 className="border-2 border-[#002B5B] text-[#001F42] hover:bg-[#002B5B] hover:text-white shadow-sm transition-all px-8 py-6 font-medium"
+                asChild
               >
-                Explore Services
+                <Link to="/services">
+                  Explore Services
+                </Link>
               </Button>
             </div>
 

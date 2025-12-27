@@ -1,0 +1,49 @@
+/* Custom select dropdown option styling */
+.select-option {
+  position: relative;
+  display: flex;
+  width: 100%;
+  cursor: pointer !important;
+  user-select: none;
+  align-items: center;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  transition: background-color 0.2s, color 0.2s;
+  outline: none;
+}
+
+.select-option:hover {
+  background-color: rgb(239, 246, 255) !important;
+  color: rgb(15, 23, 42) !important;
+}
+
+.select-option[data-highlighted=true],
+.select-option[aria-selected=true] {
+  background-color: rgba(239, 246, 255, 0.6) !important;
+  font-weight: 600 !important;
+}
+
+.select-option[data-highlighted=true] {
+  border-left: 4px solid #2563eb !important;
+}
+
+/* Fix for any select dropdown */
+[role="listbox"] > * {
+  pointer-events: auto !important;
+}
+
+/* Ensure high z-index for dropdowns */
+[role="listbox"] {
+  z-index: 999999 !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Fix Flowbite Modal dropdown overflow */
+.overflow-hidden [role="listbox"],
+.overflow-y-auto [role="listbox"] {
+  overflow: visible !important;
+  z-index: 999999 !important;
+}

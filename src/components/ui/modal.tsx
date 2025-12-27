@@ -18,7 +18,7 @@ export function Modal({ isOpen, onClose, title, children, size = '4xl' }: ModalP
       dismissible={true}
       theme={{
         content: {
-          inner: "relative z-[100001] rounded-3xl bg-white shadow-2xl dark:bg-gray-900 flex flex-col max-h-[90vh] overflow-hidden"
+          inner: "relative z-[100001] rounded-3xl bg-white shadow-2xl dark:bg-gray-900 flex flex-col max-h-[90vh] overflow-visible"
         },
         root: {
           base: "fixed inset-0 z-[100000] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto",
@@ -42,7 +42,7 @@ export function Modal({ isOpen, onClose, title, children, size = '4xl' }: ModalP
       <ModalHeader>
         {title}
       </ModalHeader>
-      <ModalBody className="p-0 overflow-y-auto custom-scrollbar">
+      <ModalBody className="p-0 overflow-y-auto overflow-x-visible custom-scrollbar">
         {children}
       </ModalBody>
     </FBModal>

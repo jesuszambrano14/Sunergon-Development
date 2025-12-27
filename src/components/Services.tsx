@@ -123,6 +123,7 @@ export function Services() {
               <p className="text-xl text-gray-600 mb-12">Need a contractor experienced in commercial and public projects?</p>
               <div className="flex flex-col sm:flex-row gap-8 justify-center">
                 <Button
+                  size="lg"
                   onClick={() => {
                     const contactSection = document.getElementById('contact');
                     if (contactSection) {
@@ -131,15 +132,16 @@ export function Services() {
                       navigate('/contact');
                     }
                   }}
-                  className="bg-[#F37021] hover:bg-[#F37021]/90 text-white px-10 py-6 transition-colors group"
+                  className="bg-[#F37021] hover:bg-[#F37021]/90 text-white h-12 px-6 py-3 rounded-xl text-base font-medium transition-colors group"
                 >
                   Get a Quote
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button
+                  size="lg"
                   onClick={() => navigate('/projects')}
                   variant="outline"
-                  className="border border-[#001F42] text-[#001F42] hover:bg-gray-50 px-10 py-6 transition-colors"
+                  className="border-2 border-[#001F42] text-[#001F42] hover:bg-gray-50 h-12 px-6 py-3 rounded-xl text-base font-medium transition-colors"
                 >
                   View Projects
                 </Button>

@@ -4,6 +4,7 @@ import { Textarea } from "../components/ui/textarea";
 import { Label } from "../components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
 import { Phone, Mail, MapPin, Clock, MessageSquare, Send } from "lucide-react";
+import { TexasServiceMap } from "../components/TexasServiceMap";
 
 export function ContactPage() {
   const contactMethods = [
@@ -309,16 +310,8 @@ export function ContactPage() {
         </div>
       </section>
 
-      {/* Map Placeholder */}
-      <section className="h-96 bg-gray-200 relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <MapPin className="w-16 h-16 text-[#F37021] mx-auto mb-4" />
-            <p className="text-gray-600 text-lg">Serving all of Texas</p>
-            <p className="text-gray-500">Map integration available</p>
-          </div>
-        </div>
-      </section>
+      {/* Texas Service Map */}
+      <TexasServiceMap />
     </div>
   );
 }
