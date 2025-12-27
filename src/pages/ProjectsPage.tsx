@@ -1,6 +1,6 @@
-import { MapPin, Calendar, Building2, ArrowRight, Filter } from "lucide-react";
+import { MapPin, Calendar, Building2, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import imgKilgoreFS from "../images/Kilgore Fs/3-DJI_20250903101825_0017_D.jpg";
 import imgKilgoreFOC from "../images/Kilgore FOC/16-DJI_20250916121623_0036_D.jpg";
 import imgMelissa6 from "../images/Melissa/melissa6.jpeg";
@@ -58,8 +58,6 @@ export function ProjectsPage() {
   const categories = [
     { id: "all", label: "All Projects" },
     { id: "commercial", label: "Commercial" },
-    { id: "infrastructure", label: "Infrastructure" },
-    { id: "industrial", label: "Industrial" },
     { id: "municipal", label: "Municipal" },
     { id: "residential", label: "Residential" },
   ];
@@ -133,8 +131,8 @@ export function ProjectsPage() {
     {
       image: imgStonecrest,
       title: "2703 Stonecrest",
-      category: "commercial",
-      categoryLabel: "Commercial Development",
+      category: "residential",
+      categoryLabel: "Residential",
       location: "Sherman, TX",
       year: "2025",
       size: "12,000 sq ft",
