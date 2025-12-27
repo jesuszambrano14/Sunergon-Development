@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Textarea } from './ui/textarea';
-import { CheckCircle2 } from 'lucide-react';
+import { Button, Checkbox, Label, Select, TextInput, Textarea, HelperText } from 'flowbite-react';
+import { CheckCircle2, Send } from 'lucide-react';
 import { useQuoteModal } from '../contexts/QuoteModalContext';
 
 interface QuoteFormData {
@@ -19,427 +16,285 @@ interface QuoteFormData {
   message: string;
 }
 
-interface QuoteFormErrors {
-  fullName?: string;
-  email?: string;
-  phone?: string;
-  projectLocation?: string;
-  message?: string;
-}
+const initialFormData: QuoteFormData = {
+  fullName: '',
+  companyName: '',
+  email: '',
+  phone: '',
+  projectLocation: '',
+  projectType: 'Commercial',
+  servicesNeeded: [],
+  projectTimeline: 'As soon as possible',
+  projectBudget: '',
+  message: '',
+};
+
+const projectTypeOptions = ['Commercial', 'Industrial', 'Residential', 'Public/Government', 'Other'];
+const serviceOptions = ['Grading & Earthwork', 'Utility Installation', 'Paving Solutions', 'Structural Concrete', 'Demolition', 'Other'];
+const timelineOptions = ['As soon as possible', 'Within 1-3 months', 'Within 3-6 months', '6+ months', 'Flexible'];
 
 export function GetQuoteForm() {
-  const { closeModal } = useQuoteModal();
-  const [formData, setFormData] = useState<QuoteFormData>({
-    fullName: '',
-    companyName: '',
-    email: '',
-    phone: '',
-    projectLocation: '',
-    projectType: 'Commercial',
-    servicesNeeded: [],
-    projectTimeline: 'As soon as possible',
-    projectBudget: '',
-    message: ''
-  });
-
-  const [errors, setErrors] = useState<QuoteFormErrors>({});
+  const [formData, setFormData] = useState<QuoteFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof QuoteFormData, string>>>({});
   const [otherService, setOtherService] = useState('');
 
-  // Service options
-  const serviceOptions = [
-    'Grading & Earthwork',
-    'Utility Installation',
-    'Paving Solutions',
-    'Structural Concrete',
-    'Demolition',
-    'Other'
-  ];
-
-  // Timeline options
-  const timelineOptions = [
-    'As soon as possible',
-    '1–3 months',
-    '3–6 months',
-    '6+ months'
-  ];
-
-  // Project type options
-  const projectTypeOptions = [
-    'Commercial',
-    'Industrial',
-    'Municipal / Public',
-    'Residential / Private'
-  ];
-
-  const validateEmail = (email: string): boolean => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  };
-
-  const validatePhone = (phone: string): boolean => {
-    // Basic validation - at least 10 digits
-    const digits = phone.replace(/\D/g, '');
-    return digits.length >= 10;
-  };
-
-  const validateForm = (): boolean => {
-    const newErrors: QuoteFormErrors = {};
-
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name as keyof QuoteFormData]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
     }
+  };
 
+  const handleCheckboxChange = (service: string) => {
+    setFormData(prev => {
+      const current = prev.servicesNeeded;
+      if (current.includes(service)) {
+        return { ...prev, servicesNeeded: current.filter(s => s !== service) };
+      }
+      return { ...prev, servicesNeeded: [...current, service] };
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors: Partial<Record<keyof QuoteFormData, string>> = {};
+    if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
     }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!validatePhone(formData.phone)) {
-      newErrors.phone = 'Please enter a valid phone number';
-    }
-
-    if (!formData.projectLocation.trim()) {
-      newErrors.projectLocation = 'Project location is required';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Project description is required';
-    }
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    if (!formData.projectLocation.trim()) newErrors.projectLocation = 'Location is required';
+    if (!formData.message.trim()) newErrors.message = 'Project description is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-
-    // Clear error for the field being typed in
-    if (errors[name as keyof QuoteFormErrors]) {
-      setErrors({
-        ...errors,
-        [name]: undefined
-      });
-    }
-  };
-
-  const handleCheckboxChange = (service: string) => {
-    const updatedServices = [...formData.servicesNeeded];
-    
-    if (updatedServices.includes(service)) {
-      // Remove the service if already selected
-      const index = updatedServices.indexOf(service);
-      updatedServices.splice(index, 1);
-    } else {
-      // Add the service
-      updatedServices.push(service);
-    }
-
-    setFormData({
-      ...formData,
-      servicesNeeded: updatedServices
-    });
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // This is just a placeholder for the file upload functionality
-    console.log('File selected:', e.target.files);
-    // In a real implementation, you would handle the file upload here
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
-    if (validateForm()) {
-      setIsSubmitting(true);
-
-      // Include other service in services needed if specified
-      let finalFormData = {...formData};
-      
-      if (otherService && formData.servicesNeeded.includes('Other')) {
-        finalFormData.servicesNeeded = formData.servicesNeeded.filter(s => s !== 'Other');
-        finalFormData.servicesNeeded.push(`Other: ${otherService}`);
-      }
-
-      // For now, just log the form data to console
-      console.log('Quote form submitted:', finalFormData);
-
-      // Simulate a submission delay
-      setTimeout(() => {
-        setIsSubmitting(false);
-        setSubmitSuccess(true);
-
-        // Auto-close modal after showing success briefly
-        setTimeout(() => {
-          closeModal();
-        }, 2500);
-
-        // Reset form after successful submission
-        setTimeout(() => {
-          setSubmitSuccess(false);
-          setFormData({
-            fullName: '',
-            companyName: '',
-            email: '',
-            phone: '',
-            projectLocation: '',
-            projectType: 'Commercial',
-            servicesNeeded: [],
-            projectTimeline: 'As soon as possible',
-            projectBudget: '',
-            message: ''
-          });
-          setOtherService('');
-        }, 5000); // Keep success message visible for 5 seconds
-      }, 1000);
-    }
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setIsSubmitting(false);
+    setSubmitSuccess(true);
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-gray-800">
       {submitSuccess ? (
-        <div className="p-8 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 className="w-8 h-8 text-green-600" />
+        <div className="p-12 text-center space-y-4">
+          <div className="mx-auto w-16 h-16 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4">
+            <CheckCircle2 size={32} />
           </div>
-          <h3 className="text-2xl font-bold text-[#001F42] mb-2">Thank You!</h3>
-          <p className="text-gray-700 mb-6">
-            Our team will review your project details and contact you shortly.
+          <h3 className="text-2xl font-bold text-[#001F42]">Quote Request Sent!</h3>
+          <p className="text-gray-600 max-w-sm mx-auto">
+            Thank you for reaching out. Our estimating team will review your details and contact you within 24-48 hours.
           </p>
-          <div className="animate-pulse">
-            <p className="text-sm text-gray-500">This window will close automatically</p>
-          </div>
+          <Button 
+            onClick={() => setSubmitSuccess(false)}
+            className="mx-auto bg-[#001F42] hover:bg-[#002B5B] border-none"
+          >
+            Send Another Request
+          </Button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 gap-y-8">
+        <form onSubmit={handleSubmit} className="p-8 md:p-12">
+          <div className="flex flex-col md:flex-row justify-between items-start gap-12 lg:gap-20">
             {/* Left Column - Contact Information */}
-            <div className="space-y-6 md:border-r border-gray-100 md:pr-16">
-              <h3 className="text-xl font-bold text-[#001F42] mb-6 border-b border-gray-50 pb-2">Contact Information</h3>
+            <div className="w-full md:w-[46%] flex flex-col space-y-8">
+              <h3 className="text-lg font-bold text-[#001F42] dark:text-white border-b border-gray-100 pb-3">Contact Information</h3>
               
-              <div className="space-y-2.5">
-                <Label htmlFor="fullName" className="font-semibold text-[#001F42] text-sm">
-                  Full Name <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleInputChange}
-                  className={`border ${errors.fullName ? 'border-red-500 bg-red-50' : 'border-gray-200'} focus:border-[#F37021] focus:ring-[#F37021]`}
-                />
-                {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
+              <div className="space-y-2">
+                <Label htmlFor="fullName" className="text-sm font-semibold text-gray-700">Full Name *</Label>
+                <div className="max-w-[380px]">
+                  <TextInput
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    color={errors.fullName ? 'failure' : 'gray'}
+                    placeholder="John Doe"
+                    required
+                  />
+                  {errors.fullName && <HelperText color="failure">{errors.fullName}</HelperText>}
+                </div>
               </div>
 
-              <div className="space-y-2.5">
-                <Label htmlFor="companyName" className="font-semibold text-[#001F42] text-sm">
-                  Company Name <span className="text-gray-500 text-xs font-normal ml-1">(optional)</span>
-                </Label>
-                <Input
-                  id="companyName"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleInputChange}
-                  className="border-gray-200 focus:border-[#F37021] focus:ring-[#F37021]"
-                />
+              <div className="space-y-2">
+                <Label htmlFor="companyName" className="text-sm font-semibold text-gray-700">Company Name (optional)</Label>
+                <div className="max-w-[380px]">
+                  <TextInput
+                    id="companyName"
+                    name="companyName"
+                    value={formData.companyName}
+                    onChange={handleInputChange}
+                    placeholder="Company Ltd."
+                  />
+                </div>
               </div>
 
-              <div className="space-y-2.5">
-                <Label htmlFor="email" className="font-semibold text-[#001F42] text-sm">
-                  Email <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={`border ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-200'} focus:border-[#F37021] focus:ring-[#F37021]`}
-                />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-semibold text-gray-700">Email Address *</Label>
+                <div className="max-w-[380px]">
+                  <TextInput
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    color={errors.email ? 'failure' : 'gray'}
+                    placeholder="john@example.com"
+                    required
+                  />
+                  {errors.email && <HelperText color="failure">{errors.email}</HelperText>}
+                </div>
               </div>
 
-              <div className="space-y-2.5">
-                <Label htmlFor="phone" className="font-semibold text-[#001F42] text-sm">
-                  Phone <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className={`border ${errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-200'} focus:border-[#F37021] focus:ring-[#F37021]`}
-                  placeholder="(123) 456-7890"
-                />
-                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+              <div className="space-y-2">
+                <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">Phone Number *</Label>
+                <div className="max-w-[380px]">
+                  <TextInput
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    color={errors.phone ? 'failure' : 'gray'}
+                    placeholder="(123) 456-7890"
+                    required
+                  />
+                  {errors.phone && <HelperText color="failure">{errors.phone}</HelperText>}
+                </div>
               </div>
             </div>
 
+            {/* Vertical Divider (Desktop) */}
+            <div className="hidden md:block w-px self-stretch bg-gray-100 mt-16"></div>
+
             {/* Right Column - Project Details */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-bold text-[#001F42] mb-6 border-b border-gray-50 pb-2">Project Details</h3>
+            <div className="w-full md:w-[46%] flex flex-col space-y-8">
+              <h3 className="text-lg font-bold text-[#001F42] dark:text-white border-b border-gray-100 pb-3">Project Details</h3>
               
-              <div className="space-y-2.5">
-                <Label htmlFor="projectLocation" className="font-semibold text-[#001F42] text-sm">
-                  Project Location <span className="text-red-500">*</span>
-                </Label>
-                <Input
-                  id="projectLocation"
-                  name="projectLocation"
-                  value={formData.projectLocation}
-                  onChange={handleInputChange}
-                  className={`border ${errors.projectLocation ? 'border-red-500 bg-red-50' : 'border-gray-200'} focus:border-[#F37021] focus:ring-[#F37021]`}
-                  placeholder="City, State"
-                />
-                {errors.projectLocation && <p className="text-red-500 text-xs mt-1">{errors.projectLocation}</p>}
+              <div className="space-y-2">
+                <Label htmlFor="projectLocation" className="text-sm font-semibold text-gray-700">Project Location *</Label>
+                <div className="max-w-[380px]">
+                  <TextInput
+                    id="projectLocation"
+                    name="projectLocation"
+                    value={formData.projectLocation}
+                    onChange={handleInputChange}
+                    color={errors.projectLocation ? 'failure' : 'gray'}
+                    placeholder="City, State"
+                    required
+                  />
+                  {errors.projectLocation && <HelperText color="failure">{errors.projectLocation}</HelperText>}
+                </div>
               </div>
 
-              <div className="space-y-2.5">
-                <Label htmlFor="projectType" className="font-semibold text-[#001F42] text-sm">
-                  Project Type <span className="text-red-500">*</span>
-                </Label>
-                <select
-                  id="projectType"
-                  name="projectType"
-                  value={formData.projectType}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border-gray-200 focus:border-[#F37021] focus:ring-[#F37021] h-10 border"
-                >
-                  {projectTypeOptions.map(option => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
+              <div className="space-y-2">
+                <Label htmlFor="projectType" className="text-sm font-semibold text-gray-700">Project Type *</Label>
+                <div className="max-w-[380px]">
+                  <Select
+                    id="projectType"
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    {projectTypeOptions.map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </Select>
+                </div>
               </div>
 
-              <div className="space-y-3">
-                <Label className="font-semibold text-[#001F42] text-sm block mb-1">
-                  Services Needed
-                </Label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="space-y-4">
+                <Label className="text-sm font-semibold text-gray-700">Services Needed</Label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-gray-50 rounded-xl">
                   {serviceOptions.map(service => (
-                    <div key={service} className="flex items-center">
-                      <input
-                        type="checkbox"
+                    <div key={service} className="flex items-center gap-2">
+                      <Checkbox
                         id={`service-${service}`}
                         checked={formData.servicesNeeded.includes(service)}
                         onChange={() => handleCheckboxChange(service)}
-                        className="rounded border-gray-300 text-[#F37021] focus:ring-[#F37021] mr-2 h-4 w-4"
                       />
-                      <Label htmlFor={`service-${service}`} className="cursor-pointer text-sm">
+                      <Label htmlFor={`service-${service}`} className="cursor-pointer text-sm font-medium text-gray-600">
                         {service}
                       </Label>
                     </div>
                   ))}
                 </div>
-                {formData.servicesNeeded.includes('Other') && (
-                  <Input
-                    placeholder="Please specify"
-                    value={otherService}
-                    onChange={(e) => setOtherService(e.target.value)}
-                    className="mt-2 border-gray-200 focus:border-[#F37021] focus:ring-[#F37021]"
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="projectTimeline" className="text-sm font-semibold text-gray-700">Project Timeline</Label>
+                <div className="max-w-[380px]">
+                  <Select
+                    id="projectTimeline"
+                    name="projectTimeline"
+                    value={formData.projectTimeline}
+                    onChange={handleInputChange}
+                  >
+                    {timelineOptions.map(option => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </Select>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="projectBudget" className="text-sm font-semibold text-gray-700">Approximate Budget (optional)</Label>
+                <div className="max-w-[380px]">
+                  <TextInput
+                    id="projectBudget"
+                    name="projectBudget"
+                    value={formData.projectBudget}
+                    onChange={handleInputChange}
+                    placeholder="$ 0.00"
                   />
-                )}
-              </div>
-
-              <div className="space-y-2.5">
-                <Label htmlFor="projectTimeline" className="font-semibold text-[#001F42] text-sm">
-                  Project Timeline
-                </Label>
-                <select
-                  id="projectTimeline"
-                  name="projectTimeline"
-                  value={formData.projectTimeline}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border-gray-200 focus:border-[#F37021] focus:ring-[#F37021] h-10 border"
-                >
-                  {timelineOptions.map(option => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="space-y-2.5">
-                <Label htmlFor="projectBudget" className="font-semibold text-[#001F42] text-sm">
-                  Approximate Budget <span className="text-gray-500 text-xs font-normal ml-1">(optional)</span>
-                </Label>
-                <Input
-                  id="projectBudget"
-                  name="projectBudget"
-                  value={formData.projectBudget}
-                  onChange={handleInputChange}
-                  className="border-gray-200 focus:border-[#F37021] focus:ring-[#F37021]"
-                  placeholder="$"
-                />
+                </div>
               </div>
             </div>
           </div>
 
           {/* Full Width - Message */}
-          <div className="mt-10 space-y-3">
-            <Label htmlFor="message" className="font-semibold text-[#001F42] text-sm">
-              Project Description <span className="text-red-500">*</span>
-            </Label>
+          <div className="mt-12 space-y-3">
+            <Label htmlFor="message" className="text-lg font-bold text-[#001F42]">Project Description *</Label>
             <Textarea
               id="message"
               name="message"
               value={formData.message}
               onChange={handleInputChange}
-              rows={5}
-              className={`w-full border ${errors.message ? 'border-red-500 bg-red-50' : 'border-gray-200'} focus:border-[#F37021] focus:ring-[#F37021] resize-none`}
-              placeholder="Tell us about your project, site conditions, and any plans/specs."
+              rows={4}
+              color={errors.message ? 'failure' : 'gray'}
+              className="resize-none rounded-xl"
+              placeholder="Tell us more about your project..."
+              required
             />
-            {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
-          </div>
-
-          {/* File Upload */}
-          <div className="mt-10">
-            <Label className="font-semibold text-[#001F42] text-sm block mb-3">
-              Upload Plans or Drawings <span className="text-gray-500 text-xs font-normal ml-1">(optional)</span>
-            </Label>
-            <div className="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center">
-              <input
-                type="file"
-                id="file-upload"
-                className="hidden"
-                onChange={handleFileChange}
-                multiple
-              />
-              <label htmlFor="file-upload" className="cursor-pointer">
-                <div className="flex flex-col items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gray-400 mb-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <p className="text-sm text-gray-500">Drag and drop files here or <span className="text-[#F37021]">browse</span></p>
-                  <p className="text-xs text-gray-400 mt-1">PDF, DWG, or image files (max 20MB)</p>
-                </div>
-              </label>
-            </div>
+            {errors.message && <HelperText color="failure">{errors.message}</HelperText>}
           </div>
 
           {/* Submit Button */}
-          <div className="mt-6">
+          <div className="mt-10">
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-[#F37021] hover:bg-[#D85A0F] text-white py-3 px-6 rounded-lg transition-colors duration-200 font-medium w-full shadow-md hover:shadow-lg"
+              className="w-full bg-[#F37021] hover:bg-[#D85A0F] enabled:hover:bg-[#D85A0F] border-none text-white py-3 text-lg font-bold shadow-md transition-all"
             >
-              {isSubmitting ? (
-                <>
-                  <span className="inline-block animate-spin mr-2 h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
-                  Processing...
-                </>
-              ) : (
-                'Request a Quote'
-              )}
+              <div className="flex items-center justify-center gap-2">
+                {isSubmitting ? 'Sending Request...' : (
+                  <>
+                    <Send size={18} />
+                    <span>Request a Quote</span>
+                  </>
+                )}
+              </div>
             </Button>
           </div>
         </form>

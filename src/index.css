@@ -2306,3 +2306,15 @@ html {
   inherits: false;
   initial-value: 0;
 }
+
+/* Force Modal to be on top of EVERYTHING */
+[role="dialog"], 
+.fixed.inset-0.z-\[9999\],
+.fixed.inset-0.z-\[100000\] {
+  z-index: 100000 !important;
+}
+
+[data-testid="modal-backdrop"],
+.fixed.inset-0.bg-black\/50 {
+  z-index: 99999 !important;
+}

@@ -12,7 +12,18 @@ import { ProjectsPage } from "./pages/ProjectsPage";
 import { ContactPage } from "./pages/ContactPage";
 import { GetAQuotePage } from "./pages/GetAQuotePage";
 import { useEffect } from "react";
-import { QuoteModalProvider } from "./contexts/QuoteModalContext";
+import { QuoteModalProvider, useQuoteModal } from "./contexts/QuoteModalContext";
+import { Modal } from "./components/ui/modal";
+import { GetQuoteForm } from "./components/GetQuoteForm";
+
+function ModalManager() {
+  const { isOpen, closeModal } = useQuoteModal();
+  return (
+    <Modal isOpen={isOpen} onClose={closeModal} title="Request a Project Quote" size="2xl">
+      <GetQuoteForm />
+    </Modal>
+  );
+}
  
 
 // Helper hook to handle Intersection Observer for animations
@@ -75,6 +86,7 @@ export default function App() {
   
   return (
     <QuoteModalProvider>
+      <ModalManager />
       <div className="min-h-screen">
         <Header />
         <main>
@@ -103,3 +115,4 @@ export default function App() {
     </QuoteModalProvider>
   );
 }
+
