@@ -2,7 +2,7 @@ import { useState } from "react";
 import { MapPin } from "lucide-react";
 
 export function TexasServiceMap() {
-  // Define the North Texas region highlight and pin
+  // Define the North Texas region highlight and pin - updated
   const northTexas = {
     label: "North Texas",
     description: "Dallas–Fort Worth Metroplex & surrounding cities",
