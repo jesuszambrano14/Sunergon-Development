@@ -74,7 +74,11 @@ export function Projects() {
   const featuredProjects = projects.slice(0, 3);
 
   return (
-    <section className="py-24 md:py-32 bg-gray-50 relative overflow-hidden" id="projects">
+    <section 
+      className="pt-24 md:pt-32 bg-gray-50 relative overflow-hidden" 
+      id="projects"
+      style={{ paddingBottom: '50px' }}
+    >
       {/* Background Elements */}
       <SectionBackgroundAccents 
         variant="light" 
@@ -143,7 +147,10 @@ export function Projects() {
         </div>
 
         {/* CTA Buttons with increased spacing */}
-        <div className="mt-20 pt-12 border-t border-gray-100 text-center max-w-xl mx-auto">
+        <div 
+          className="pt-12 border-t border-gray-100 text-center max-w-xl mx-auto"
+          style={{ marginTop: '30px' }}
+        >
           {/* View All Projects Button */}
           <Link to="/projects">
             <Button className="bg-[#F37021] hover:bg-[#D85A0F] text-white shadow-lg shadow-[#F37021]/20 hover:shadow-xl transition-colors duration-200 px-8 py-3.5 group font-medium">

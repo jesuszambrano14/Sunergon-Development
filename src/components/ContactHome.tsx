@@ -134,7 +134,11 @@ export function ContactHome() {
   };
 
   return (
-    <section className="py-24 md:py-28 bg-gray-50 relative overflow-hidden" id="contact-home">
+    <section 
+      className="pb-24 md:pb-28 bg-gray-50 relative overflow-hidden" 
+      id="contact-home"
+      style={{ paddingTop: '40px' }}
+    >
       {/* Background Elements */}
       <SectionBackgroundAccents 
         variant="default" 

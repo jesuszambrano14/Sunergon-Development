@@ -111,11 +111,11 @@ export function TexasServiceMap() {
                 className="transition-all duration-300"
               />
               
-              {/* North Texas callout line */}
+              {/* North Texas callout line - moved to left */}
               <line 
-                x1={northTexas.x + 12} 
+                x1={northTexas.x - 12} 
                 y1={northTexas.y - 10} 
-                x2={northTexas.x + 80} 
+                x2={northTexas.x - 80} 
                 y2={northTexas.y - 35}
                 stroke="#002B5B" 
                 strokeOpacity="0.6"
@@ -123,14 +123,14 @@ export function TexasServiceMap() {
                 className={`${isActive ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
               />
               
-              {/* North Texas callout box */}
-              <g className={`${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} transition-all duration-300 transform origin-bottom-left`}
-                 transform={`translate(${northTexas.x + 80}, ${northTexas.y - 45})`}>
+              {/* North Texas callout box - moved to left */}
+              <g className={`${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} transition-all duration-300 transform origin-bottom-right`}
+                 transform={`translate(${northTexas.x - 80}, ${northTexas.y - 45})`}>
                 <rect 
-                  x="-65" 
+                  x="-75" 
                   y="-25" 
-                  width="130" 
-                  height="36" 
+                  width="150" 
+                  height="42" 
                   rx="4" 
                   fill="white" 
                   stroke="#002B5B"
@@ -141,7 +141,7 @@ export function TexasServiceMap() {
                 <text 
                   textAnchor="middle" 
                   x="0" 
-                  y="-10" 
+                  y="-8" 
                   fill="#002B5B" 
                   fontSize="10" 
                   fontWeight="600"
@@ -151,11 +151,20 @@ export function TexasServiceMap() {
                 <text 
                   textAnchor="middle" 
                   x="0" 
-                  y="5" 
+                  y="6" 
                   fill="#475569" 
                   fontSize="7"
                 >
-                  Dallas–Fort Worth Metroplex & surrounding cities
+                  Dallas–Fort Worth Metroplex
+                </text>
+                <text 
+                  textAnchor="middle" 
+                  x="0" 
+                  y="14" 
+                  fill="#475569" 
+                  fontSize="7"
+                >
+                  & surrounding cities
                 </text>
               </g>
 
