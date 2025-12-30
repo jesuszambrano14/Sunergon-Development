@@ -1,6 +1,8 @@
 import { MapPin, Calendar, Building2, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useEffect, useRef, useState } from "react";
+import { useQuoteModal } from "../contexts/QuoteModalContext";
+import { Link } from "react-router-dom";
 import imgKilgoreFS from "../images/Kilgore Fs/3-DJI_20250903101825_0017_D.jpg";
 import imgKilgoreFOC from "../images/Kilgore FOC/16-DJI_20250916121623_0036_D.jpg";
 import imgMelissa6 from "../images/Melissa/melissa6.jpeg";
@@ -53,6 +55,7 @@ function Counter({ end, duration = 2000, suffix = "", prefix = "", startDelay = 
 }
 
 export function ProjectsPage() {
+  const { openModal } = useQuoteModal();
   const [filter, setFilter] = useState("all");
 
   const categories = [
@@ -280,18 +283,21 @@ export function ProjectsPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg"
+              onClick={openModal}
               className="bg-[#F37021] hover:bg-[#F37021]/90 text-white shadow-lg shadow-[#F37021]/20 gap-2"
             >
               Request a Quote
               <ArrowRight className="w-5 h-5" />
             </Button>
-            <Button 
-              size="lg"
-              variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-[#002B5B] transition-all"
-            >
-              Contact Us
-            </Button>
+            <Link to="/contact">
+              <Button 
+                size="lg"
+                variant="outline"
+                className="border-2 border-white text-white hover:bg-white hover:text-[#002B5B] transition-all"
+              >
+                Contact Us
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

@@ -1,65 +1,78 @@
-import { MapPin } from "lucide-react";
+// Texas Service Map Component
 
 export function TexasServiceMap() {
-  // Define city locations for the service area chips
-  const serviceCities = [
-    "Dallas", 
-    "Frisco", 
-    "McKinney", 
-    "Plano", 
-    "Little Elm", 
-    "Prosper", 
-    "Aubrey"
+  // Coverage tiers data structure
+  const coverageTiers = [
+    {
+      title: "Primary Focus",
+      region: "Dallas–Fort Worth Metro",
+      description: "Core service area with dedicated local teams",
+      priority: 1
+    },
+    {
+      title: "Full Service Area",
+      region: "North Texas Counties", 
+      description: "Complete construction capabilities",
+      priority: 2
+    },
+    {
+      title: "Statewide Availability",
+      region: "Select Projects Across Texas",
+      description: "For qualifying commercial & public sector projects",
+      priority: 3
+    }
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-16 md:py-20 bg-white">
       <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           
-          {/* Left column: Text Content */}
-          <div className="space-y-6">
-            <h2 className="text-3xl font-bold text-[#002B5B]">Serving All of Texas</h2>
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Commercial & public construction services across the state — with <span className="font-medium">focused coverage in North Texas</span>.
-            </p>
-            
-            <div className="mt-8">
-              <h3 className="text-lg font-medium text-[#002B5B] mb-4">Focused Coverage: Dallas–Fort Worth & North Texas</h3>
-              <div className="flex flex-wrap gap-2">
-                {serviceCities.map((city) => (
-                  <div 
-                    key={city}
-                    className="inline-flex items-center px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                  >
-                    <MapPin className="w-3.5 h-3.5 mr-1.5 text-[#F37021]" strokeWidth={2.5} />
-                    {city}
-                  </div>
-                ))}
+          {/* Left column: Coverage Information */}
+          <div>
+            {/* Header Section - Clean & Minimal */}
+            <div className="mb-8">
+              <div className="inline-block mb-2">
+                <div className="h-0.5 w-12 bg-[#F37021] mb-3"></div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#002B5B]">Texas Coverage</h2>
               </div>
-              
-              <div className="mt-8">
-                <h4 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Coverage Highlights</h4>
-                <ul className="text-gray-700 space-y-2.5">
-                  <li className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#F37021]/20 flex items-center justify-center">
-                      <span className="w-2 h-2 rounded-full bg-[#F37021]"></span>
+              <p className="text-gray-600 mt-3 max-w-xl">
+                Strategic construction services throughout Texas with specialized expertise in the North Texas region.
+              </p>
+            </div>
+            
+            {/* Coverage Tiers - Softer Card Layout with Better Spacing */}
+            <div className="space-y-8">
+              {coverageTiers.map((tier) => (
+                <div 
+                  key={tier.title} 
+                  className="group cursor-pointer p-1"
+                >
+                  <div className="p-6">
+                    <div className="flex items-center mb-3">
+                      <div className="w-3 h-3 rounded-full flex-shrink-0 bg-[#F37021]"></div>
+                      <h3 className="font-semibold text-[#002B5B] ml-3 group-hover:text-[#002B5B]/80">{tier.title}</h3>
                     </div>
-                    <span className="font-medium">Dallas–Fort Worth Metroplex</span> — Primary Focus
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#F37021]/10 flex items-center justify-center">
-                      <span className="w-2 h-2 rounded-full bg-[#F37021]"></span>
+                    
+                    <div className="ml-6 pl-3">
+                      <div className="flex items-center mb-2">
+                        <span className="text-xs mr-2 text-[#F37021]">●</span>
+                        <p className="text-lg font-medium text-gray-800 group-hover:text-[#001F42]">{tier.region}</p>
+                      </div>
+                      <p className="text-sm text-gray-600 ml-4">{tier.description}</p>
                     </div>
-                    <span className="font-medium">North Texas Counties</span> — Full Service
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#F37021]/10 flex items-center justify-center">
-                      <span className="w-2 h-2 rounded-full bg-[#F37021]"></span>
-                    </div>
-                    <span className="font-medium">Statewide</span> — Select Projects
-                  </li>
-                </ul>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Supporting Information - Clean with Better Spacing */}
+            <div className="mt-10 pt-8 border-t border-gray-100">
+              <div className="p-4 rounded-lg hover:bg-gray-50 transition-colors duration-300 flex items-start cursor-pointer">
+                <div className="w-2 h-2 rounded-full bg-[#F37021] mt-1.5 mr-3 flex-shrink-0"></div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  <span className="text-[#002B5B] font-semibold">Need a project outside our service area?</span> Contact us to discuss availability and capabilities for your specific requirements.
+                </p>
               </div>
             </div>
           </div>
@@ -75,7 +88,7 @@ export function TexasServiceMap() {
               scrolling="no" 
               marginHeight={0} 
               marginWidth={0} 
-              src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Dallas-Fort Worth metroplex&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+              src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Dallas, Texas&amp;t=&amp;z=11&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               title="Sunergon Service Area Map"
             />
           </div>

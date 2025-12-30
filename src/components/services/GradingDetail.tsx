@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   CheckCircle2,
   HardHat,
@@ -217,9 +218,11 @@ const GradingDetail: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="primary" className="text-lg px-8">
-              Contact Us Today <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+            <Link to="/contact">
+              <Button variant="primary" className="text-lg px-8">
+                Contact Us Today <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
             <Button variant="outline" className="text-white border-white hover:bg-white hover:text-slate-900 text-lg px-8">
               View Portfolio
             </Button>

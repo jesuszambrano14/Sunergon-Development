@@ -75,7 +75,7 @@ export function Projects() {
 
   return (
     <section 
-      className="pt-24 md:pt-32 bg-gray-50 relative overflow-hidden" 
+      className="pt-24 md:pt-32 bg-white relative overflow-hidden" 
       id="projects"
       style={{ paddingBottom: '50px' }}
     >

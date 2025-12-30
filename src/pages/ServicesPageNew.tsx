@@ -125,10 +125,10 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => (
           </li>
         ))}
       </ul>
-      <button className="text-[#F37021] font-medium flex items-center hover:underline">
+      <Link to="/contact" className="text-[#F37021] font-medium flex items-center hover:underline">
         Learn more
         <ArrowRight className="w-4 h-4 ml-1.5" />
-      </button>
+      </Link>
     </div>
   </div>
 );
@@ -216,28 +216,6 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* CTA SECTION (minimal light style) */}
-      <section className="py-20 bg-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-slate-600 max-w-3xl mx-auto mb-8 text-lg">
-            Each project is unique. Let’s discuss how we can tailor our services to your specific needs.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
-            <Link to="/contact" className="w-full sm:w-auto md:min-w-[240px] px-12 md:px-16 py-6 md:py-7 rounded-full bg-[#F37021] text-white shadow-[0_8px_18px_-6px_rgba(243,112,33,0.6)] hover:bg-[#FF8844] hover:shadow-[0_16px_28px_-8px_rgba(243,112,33,0.55)] transition-all font-semibold text-lg md:text-xl leading-none focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#F37021]/30 inline-flex items-center justify-center">
-              Contact us today <ArrowRight className="inline-block ml-3 w-6 h-6 align-middle" />
-            </Link>
-            <Link to="/projects" className="w-full sm:w-auto md:min-w-[240px] px-12 md:px-16 py-6 md:py-7 rounded-full border-2 border-[#002B5B] text-[#002B5B] bg-white hover:bg-[#002B5B] hover:text-white transition-all font-semibold text-lg md:text-xl leading-none shadow-[0_8px_18px_-6px_rgba(0,0,0,0.12)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#002B5B]/20 inline-flex items-center justify-center">
-              View portfolio
-            </Link>
-          </div>
-
-          <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 text-sm text-slate-500">
-            <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span>Fast estimates. Reliable timelines. Guaranteed quality.</span>
-          </div>
-        </div>
-      </section>
 
     </div>
   );

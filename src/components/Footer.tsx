@@ -31,8 +31,8 @@ export function Footer() {
 
   return (
     <div>
-      {/* CTA Banner - Kept separate from the footer (hidden on About page) */}
-      {location.pathname !== '/about' && location.pathname !== '/projects' && (
+      {/* CTA Banner - Kept separate from the footer (hidden on About, Projects, and Contact pages) */}
+      {location.pathname !== '/about' && location.pathname !== '/projects' && location.pathname !== '/contact' && (
         <section className="bg-white py-20 md:py-28">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-[#002B5B] text-white rounded-2xl shadow-xl border border-[#002B5B] overflow-hidden reveal fade-up once">

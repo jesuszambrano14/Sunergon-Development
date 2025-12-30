@@ -2,10 +2,12 @@ import { Layers, Ruler, Building2, Droplet, Briefcase, Landmark, ArrowRight } fr
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useEffect, useState, useRef } from "react";
+import { useQuoteModal } from "../contexts/QuoteModalContext";
 import SectionBackgroundAccents from "./ui/SectionBackground";
 
 export function Services() {
   const navigate = useNavigate();
+  const { openModal } = useQuoteModal();
   
   // Create useInView hook for animation
   function useInView(threshold = 0.1, rootMargin = "0px") {
@@ -118,20 +120,13 @@ export function Services() {
           <div className="h-12 md:h-20"></div>
 
           {/* CTA Section */}
-          <div className="mt-64 md:mt-80 pt-24 border-t border-gray-200">
+          <div className="mt-64 md:mt-80 pt-24">
             <div className="text-center max-w-3xl mx-auto">
               <p className="text-xl text-gray-600 mb-12">Need a contractor experienced in commercial and public projects?</p>
               <div className="flex flex-col sm:flex-row gap-8 justify-center">
                 <Button
                   size="lg"
-                  onClick={() => {
-                    const contactSection = document.getElementById('contact');
-                    if (contactSection) {
-                      contactSection.scrollIntoView({ behavior: 'smooth' });
-                    } else {
-                      navigate('/contact');
-                    }
-                  }}
+                  onClick={openModal}
                   className="bg-[#F37021] hover:bg-[#F37021]/90 text-white h-12 px-6 py-3 rounded-xl text-base font-medium transition-colors group"
                 >
                   Get a Quote

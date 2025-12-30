@@ -5,8 +5,10 @@ import { Label } from "../components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
 import { Phone, Mail, MapPin, Clock, MessageSquare, Send } from "lucide-react";
 import { TexasServiceMap } from "../components/TexasServiceMap";
+import { useQuoteModal } from "../contexts/QuoteModalContext";
 
 export function ContactPage() {
+  const { openModal } = useQuoteModal();
   const contactMethods = [
     {
       icon: Phone,
@@ -274,6 +276,7 @@ export function ContactPage() {
                 <Button 
                   variant="outline"
                   className="w-full border-2 border-white text-white hover:bg-white hover:text-[#002B5B] transition-all"
+                  onClick={openModal}
                 >
                   Book Appointment
                 </Button>
@@ -282,6 +285,9 @@ export function ContactPage() {
           </div>
         </div>
       </section>
+
+      {/* Texas Service Map */}
+      <TexasServiceMap />
 
       {/* FAQ Section */}
       <section className="py-24 bg-white">
@@ -309,9 +315,6 @@ export function ContactPage() {
           </div>
         </div>
       </section>
-
-      {/* Texas Service Map */}
-      <TexasServiceMap />
     </div>
   );
 }
