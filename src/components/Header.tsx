@@ -9,23 +9,23 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { openModal } = useQuoteModal();
 
-  const navLinks = ["Home", "About", "Services", "Projects", "Contact"];
+  const navLinks = ["About", "Services", "Projects", "Contact"];
 
   return (
     <header className="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-gray-100">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <div className="flex items-center gap-1">
+          {/* Logo with Home Link */}
+          <Link to="/" className="flex items-center gap-1">
             <div className="relative">
-              <img src={logo} alt="Sunergon Development" className="h-12 sm:h-12 w-24  shadow-[#002B5B]/20" />
+              <img src={logo} alt="Sunergon Development" className="h-12 sm:h-12 w-24 shadow-[#002B5B]/20" />
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => {
-              const path = link === "Home" ? "/" : `/${link.toLowerCase()}`;
+              const path = `/${link.toLowerCase()}`;
               return (
                 <Link
                   key={link}
@@ -59,7 +59,7 @@ export function Header() {
           <div className="lg:hidden py-6 border-t border-gray-100">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => {
-                const path = link === "Home" ? "/" : `/${link.toLowerCase()}`;
+                const path = `/${link.toLowerCase()}`;
                 return (
                   <Link
                     key={link}

@@ -1,6 +1,7 @@
 import { Shield, Award, TrendingUp, Target, Users, CheckCircle2, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 import React, { useEffect, useRef, useState } from "react";
+import kilgoreFsImage from "../images/Kilgore Fs/2-DJI_20250903101755_0016_D.jpg";
 
 function Counter({ end, duration = 2000, suffix = "", prefix = "", startDelay = 0 }: { end: number; duration?: number; suffix?: string; prefix?: string; startDelay?: number }) {
   const elRef = useRef<HTMLSpanElement | null>(null);
@@ -103,9 +104,10 @@ export function AboutPage() {
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1541888915364-aaeed51d238b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjB0ZWFtJTIwbWVldGluZ3xlbnwxfH8fDE3NjA5ODIzOTB8MA&ixlib=rb-4.1.0&q=80&w=1080"
+                  src={kilgoreFsImage}
                   alt="Construction team"
                   className="w-full h-full object-cover"
+                  data-component-name="AboutPage"
                 />
               </div>
             </div>

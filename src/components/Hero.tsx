@@ -3,8 +3,11 @@ import { ArrowRight, Award, Check } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useQuoteModal } from "../contexts/QuoteModalContext";
 import { Link } from "react-router-dom";
-// Using placeholder image since the import is causing an error
-const imgKilgoreFOCFirst = "https://images.unsplash.com/photo-1503387837-b154d5074bd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBzaXRlfGVufDF8fHx8MTcwNDIzMjM5Mnww&ixlib=rb-4.1.0&q=80";
+// Import the images from Kilgore folders
+import imgKilgoreFOCFirst from "../images/Kilgore FOC/3-DJI_20250716092621_0016_D.jpg";
+import imgKilgoreFOCSecond from "../images/Kilgore FOC/9-DJI_20250903120300_0021_D.jpg";
+import imgKilgoreFsImage from "../images/Kilgore Fs/7-DJI_20250916115816_0022_D.jpg";
+import imgKilgoreFOCThird from "../images/Kilgore FOC/18-DJI_20250916121704_0038_D.jpg";
 import SectionBackgroundAccents from "./ui/SectionBackground";
 
 function Counter({ end, duration = 1500, suffix = "", prefix = "" }: { end: number; duration?: number; suffix?: string; prefix?: string }) {
@@ -133,35 +136,39 @@ export function Hero() {
               <div className="space-y-4 lg:space-y-6">
                 <div className="aspect-square rounded-2xl overflow-hidden shadow-xl transform transition-transform hover:scale-[1.02] hover:shadow-2xl duration-500">
                   <img
-                    src={imgKilgoreFOCFirst}
+                    src={imgKilgoreFOCSecond}
                     alt="Construction equipment"
                     className="w-full h-full object-cover"
+                    data-component-name="Hero"
                   />
                 </div>
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl transform transition-transform hover:scale-[1.02] hover:shadow-2xl duration-500">
                   <img
-                    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb2FkJTIwcGF2aW5nJTIwY29uc3RydWN0aW9ufGVufDF8fHx8MTc2MDk4MjQ3OXww&ixlib=rb-4.1.0&q=80"
+                    src={imgKilgoreFsImage}
                     alt="Paving project"
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    data-component-name="Hero"
                   />
                 </div>
               </div>
               <div className="space-y-4 lg:space-y-6 pt-8">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl transform transition-transform hover:scale-[1.02] hover:shadow-2xl duration-500">
                   <img
-                    src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25jcmV0ZSUyMGZvdW5kYXRpb24lMjBjb25zdHJ1Y3Rpb258ZW58MXx8fHwxNzYwOTgyNDgwfDA&ixlib=rb-4.1.0&q=80"
+                    src={imgKilgoreFOCFirst}
                     alt="Concrete work"
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    data-component-name="Hero"
                   />
                 </div>
                 <div className="aspect-square rounded-2xl overflow-hidden shadow-xl transform transition-transform hover:scale-[1.02] hover:shadow-2xl duration-500">
                   <img
-                    src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb21tZXJjaWFsJTIwYnVpbGRpbmclMjBjb25zdHJ1Y3Rpb258ZW58MXx8fHwxNzYwOTM2Njk3fDA&ixlib=rb-4.1.0&q=80"
+                    src={imgKilgoreFOCThird}
                     alt="Commercial construction"
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    data-component-name="Hero"
                   />
                 </div>
               </div>
