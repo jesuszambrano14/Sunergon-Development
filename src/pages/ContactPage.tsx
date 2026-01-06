@@ -27,7 +27,7 @@ export function ContactPage() {
     {
       icon: MapPin,
       title: "Visit Us",
-      detail: "Dallas, Texas",
+      detail: "4122 Cowling Rd, Sanger, Texas",
       link: "#",
       description: "Serving all of Texas"
     },

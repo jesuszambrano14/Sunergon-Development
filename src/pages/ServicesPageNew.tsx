@@ -5,7 +5,7 @@ import {
   ArrowRight, Ruler, Route, Droplets, Mountain, Hammer
 } from 'lucide-react';
 import imgGrading from "../images/Kilgore Fs/3-DJI_20250903101825_0017_D.jpg";
-import imgPaving from "../images/Kilgore FOC/13-DJI_20250916121456_0032_D.jpg"
+import imgPaving from "../images/Melissa/melissa5.jpeg"
 import imgUtilities from "../images/sewerimage.jpg"
 // Services Data
 const services = [

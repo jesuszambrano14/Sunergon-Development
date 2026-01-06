@@ -88,7 +88,7 @@ export function TexasServiceMap() {
               scrolling="no" 
               marginHeight={0} 
               marginWidth={0} 
-              src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Dallas, Texas&amp;t=&amp;z=11&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+              src="https://maps.google.com/maps?width=100%&amp;height=100%&amp;hl=en&amp;q=Sunergon+Headquarters@4122+Cowling+Rd,+Sanger,+Texas&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               title="Sunergon Service Area Map"
             />
           </div>
