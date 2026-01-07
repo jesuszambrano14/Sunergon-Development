@@ -174,11 +174,11 @@ export function ProjectsPage() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-8 mt-12">
               <div>
-                <div className="text-4xl text-[#F37021] mb-2"><Counter end={500} suffix="+" duration={2200} startDelay={0} /></div>
+                <div className="text-4xl text-[#F37021] mb-2"><Counter end={10} prefix="+" duration={2200} startDelay={0} /></div>
                 <div className="text-sm text-gray-300">Projects Completed</div>
               </div>
               <div>
-                <div className="text-4xl text-[#F37021] mb-2"><Counter end={50} prefix="$" suffix="M+" duration={2400} startDelay={200} /></div>
+                <div className="text-4xl text-[#F37021] mb-2"><Counter end={15} prefix="$" suffix="M" duration={2400} startDelay={200} /></div>
                 <div className="text-sm text-gray-300">Total Project Value</div>
               </div>
               <div>

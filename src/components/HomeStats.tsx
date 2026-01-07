@@ -54,10 +54,10 @@ function Counter({ end, duration = 1800, suffix = "", prefix = "" }: {
 
 export default function HomeStats() {
   const items = [
-    { value: 25, label: "Years of Excellence", suffix: "+" },
-    { value: 500, label: "Projects Completed", suffix: "+" },
-    { value: 100, label: "Client Satisfaction", suffix: "%" },
-    { value: 50, label: "Project Value", prefix: "$", suffix: "M+" },
+    { value: 3000, label: "Piers Installed", prefix: "+", suffix: " LF" },
+    { value: 6000, label: "Grade Beams Constructed", prefix: "+", suffix: " LF" },
+    { value: 35000, label: "Concrete Slabs Placed", prefix: "+", suffix: " SF" },
+    { value: 100000, label: "Paving Completed", prefix: "+", suffix: " SF" },
   ];
 
   return (

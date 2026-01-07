@@ -56,10 +56,10 @@ export function AboutPage() {
   ];
 
   const stats = [
-    { value: "25+", label: "Years of Excellence" },
-    { value: "500+", label: "Projects Completed" },
+    { value: "100%", label: "On-Time Delivery" },
+    { value: "10+", label: "Projects Completed" },
     { value: "100%", label: "Client Satisfaction" },
-    { value: "$50M+", label: "Total Project Value" },
+    { value: "$15M", label: "Total Project Value" },
   ];
 
   const certifications = [
@@ -122,10 +122,10 @@ export function AboutPage() {
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-4xl lg:text-5xl text-[#F37021] mb-2">
-                  {index === 0 && (<Counter end={25} suffix="+" duration={2000} startDelay={0} />)}
-                  {index === 1 && (<Counter end={500} suffix="+" duration={2200} startDelay={150} />)}
+                  {index === 0 && (<Counter end={100} suffix="%" duration={2000} startDelay={0} />)}
+                  {index === 1 && (<Counter end={10} prefix="+" duration={2200} startDelay={150} />)}
                   {index === 2 && (<Counter end={100} suffix="%" duration={1800} startDelay={300} />)}
-                  {index === 3 && (<Counter end={50} prefix="$" suffix="M+" duration={2400} startDelay={450} />)}
+                  {index === 3 && (<Counter end={15} prefix="$" suffix="M" duration={2400} startDelay={450} />)}
                 </div>
                 <div className="text-gray-600">{stat.label}</div>
               </div>

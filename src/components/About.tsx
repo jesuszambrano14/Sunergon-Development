@@ -85,7 +85,9 @@ export function About() {
       }
     }, [isInView, end, duration]);
     
-    return <div ref={ref}>{prefix}{value}{suffix}</div>;
+    // Format the number with comma separators for thousands
+    const formattedValue = value.toLocaleString();
+    return <div ref={ref}>{prefix}{formattedValue}{suffix}</div>;
   };
 
   return (
@@ -183,27 +185,27 @@ export function About() {
             <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-200">
               <div className="text-center p-6 md:p-8">
                 <div className="text-4xl md:text-5xl font-extrabold text-[#001F42] mb-3 tracking-tight">
-                  <Counter end={25} duration={1800} suffix="+" />
+                  <Counter end={3000} duration={1800} prefix="+" suffix=" LF" />
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-500">Years of Excellence</div>
+                <div className="text-xs uppercase tracking-wider text-gray-500">Piers Installed</div>
               </div>
               <div className="text-center p-6 md:p-8">
                 <div className="text-4xl md:text-5xl font-extrabold text-[#001F42] mb-3 tracking-tight">
-                  <Counter end={500} duration={2000} suffix="+" />
+                  <Counter end={6000} duration={2000} prefix="+" suffix=" LF" />
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-500">Projects Completed</div>
+                <div className="text-xs uppercase tracking-wider text-gray-500">Grade Beams Constructed</div>
               </div>
               <div className="text-center p-6 md:p-8">
                 <div className="text-4xl md:text-5xl font-extrabold text-[#001F42] mb-3 tracking-tight">
-                  <Counter end={100} duration={1600} suffix="%" />
+                  <Counter end={35000} duration={1600} prefix="+" suffix=" Ft²" />
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-500">Client Satisfaction</div>
+                <div className="text-xs uppercase tracking-wider text-gray-500">Concrete Slabs Placed</div>
               </div>
               <div className="text-center p-6 md:p-8">
                 <div className="text-4xl md:text-5xl font-extrabold text-[#001F42] mb-3 tracking-tight">
-                  <Counter end={50} duration={1800} prefix="$" suffix="M+" />
+                  <Counter end={100000} duration={1800} prefix="+" suffix=" Ft²" />
                 </div>
-                <div className="text-xs uppercase tracking-wider text-gray-500">Project Value</div>
+                <div className="text-xs uppercase tracking-wider text-gray-500">Paving Completed</div>
               </div>
             </div>
           </div>

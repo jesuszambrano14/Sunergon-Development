@@ -116,12 +116,12 @@ export function Hero() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200 reveal fade-in once stagger-4">
               <div>
-                <div className="text-3xl lg:text-4xl font-bold text-[#D85A0F] mb-1"><Counter end={25} suffix="+" duration={1400} /></div>
-                <div className="text-sm text-gray-900 font-semibold">Years Experience</div>
+                <div className="text-3xl lg:text-4xl font-bold text-[#D85A0F] mb-1"><Counter end={10} prefix="+" duration={1400} /></div>
+                <div className="text-sm text-gray-900 font-semibold">Projects</div>
               </div>
               <div>
-                <div className="text-3xl lg:text-4xl font-bold text-[#D85A0F] mb-1"><Counter end={500} suffix="+" duration={1600} /></div>
-                <div className="text-sm text-gray-900 font-semibold">Projects Completed</div>
+                <div className="text-3xl lg:text-4xl font-bold text-[#D85A0F] mb-1"><Counter end={15} prefix="+" suffix="M" duration={1600} /></div>
+                <div className="text-sm text-gray-900 font-semibold">In Contracts</div>
               </div>
               <div>
                 <div className="text-3xl lg:text-4xl font-bold text-[#D85A0F] mb-1"><Counter end={100} suffix="%" duration={1200} /></div>
