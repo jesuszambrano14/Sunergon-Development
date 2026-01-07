@@ -1,12 +1,12 @@
-import React from 'react';
+// React is implicitly used in JSX transformation
 import { Link } from 'react-router-dom';
 import { 
   CheckCircle2, HardHat, ShieldCheck, 
-  ArrowRight, Ruler, Route, Droplets, Mountain, Hammer
+  ArrowRight, Ruler, Route, Building2, Mountain, Hammer
 } from 'lucide-react';
 import imgGrading from "../images/Kilgore Fs/3-DJI_20250903101825_0017_D.jpg";
 import imgPaving from "../images/Melissa/melissa5.jpeg"
-import imgUtilities from "../images/sewerimage.jpg"
+import imgConcrete from "../images/Kilgore FOC/12-DJI_20250916121538_0035_D.jpg"
 // Services Data
 const services = [
   {
@@ -44,19 +44,19 @@ const services = [
   },
   {
     id: 3,
-    title: 'Utilities',
-    description: 'Complete utility installation including water, sewer, storm drainage, and electrical infrastructure.',
-    icon: Droplets,
+    title: 'Structural Concrete',
+    description: 'Complete structural concrete solutions including slabs-on-grade, drilled piers, grade beams, footings, and engineered foundations. We construct systems with and without void forms, adapting to specific soil conditions and project requirements.',
+    icon: Building2,
     color: 'bg-blue-100 text-blue-500',
     features: [
-      'Water & sewer lines',
-      'Storm drainage',
-      'Underground utilities',
-      'Utility trenching',
-      'Manhole installation',
-      'Catch basin installation'
+      'Slabs-on-grade',
+      'Drilled piers',
+      'Grade beams & footings',
+      'Foundations with void forms',
+      'Structural foundations',
+      'Engineered concrete systems'
     ],
-    image: imgUtilities
+    image: imgConcrete
   }
 ];
 
