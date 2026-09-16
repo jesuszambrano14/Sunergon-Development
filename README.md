@@ -1,29 +1,64 @@
+# Sunergon Development
 
-  # Sunergon Development
+**Responsive company website built with React for a construction and development business.**
 
-  This is a code bundle for Sunergon Development. The original project is available at https://www.figma.com/design/9e4mANYGWj7zaWSenHQxKh/Sunergon-Development.
+This repository contains the frontend implementation of the Sunergon Development website. The project translates a visual design into a multi-page React application focused on presenting the company, its services, completed work, and customer contact/quote workflows.
 
-  ## Running the code
+## Project overview
 
-  Run `npm install` to install the dependencies.
+The application includes dedicated experiences for core business content rather than functioning as a single static landing page. The source contains pages for company information, services, projects, contact, and quote requests, supported by reusable UI components and shared application state.
 
-  Run `npm run dev` to start the development server.
+## Key areas
 
-## Requirements
+- Company/about experience
+- Construction services presentation
+- Project portfolio
+- Contact experience
+- Quote-request flow
+- Reusable component-based UI
+- Responsive frontend architecture
+- Client-side routing
+- Production build workflow
 
-- Node.js 18+ recomendado (20+ ideal)
+## Tech stack
+
+- React 18
+- JavaScript / JSX
+- Vite
+- React Router
+- Radix UI component primitives
+- React Hook Form
+- Recharts
+- Lucide icons
+- Embla Carousel
+- Flowbite
+- Context-based application state
+
+## Project structure
+
+```text
+src/
+├── components/     Reusable UI components and page sections
+├── contexts/       Shared React state
+├── pages/          About, services, projects, contact and quote pages
+├── styles/         Global styling and design tokens
+└── main entry      Application bootstrap and routing
+```
+
+## Engineering focus
+
+This project demonstrates frontend engineering around a real business website, including translating design requirements into reusable React components, organizing a multi-page application, implementing routing and shared state, and maintaining a production build workflow.
+
+The project also reflects an important part of product development: software is not only about implementing components—it is about understanding what a business needs to communicate and turning those requirements into a usable digital experience.
+
+## Local development
+
+### Requirements
+
+- Node.js 18+ (Node 20+ recommended)
 - npm 9+
 
-## Scripts disponibles
-
-- `npm install`: instala dependencias
-- `npm run dev`: inicia el servidor de desarrollo (Vite)
-- `npm run build`: genera el build de producción en `dist/`
-- `npm run preview`: sirve localmente el build generado
-
-## Cómo trabajar en el proyecto
-
-1) Clonar el repo
+### Run locally
 
 ```bash
 git clone https://github.com/jesuszambrano14/Sunergon-Development.git
@@ -32,38 +67,36 @@ npm install
 npm run dev
 ```
 
-2) Crear ramas por feature
-
-```bash
-git checkout -b feature/nombre-corto
-# ... cambios ...
-git add -A && git commit -m "feat: breve descripción"
-git push -u origin feature/nombre-corto
-```
-
-3) Abrir Pull Request hacia `main` desde GitHub
-
-## Build de producción
+### Production build
 
 ```bash
 npm run build
-# salida en dist/
 ```
 
-## Estructura (resumen)
+The production bundle is generated in `dist/`.
 
-- `src/components`: componentes reutilizables de UI y secciones
-- `src/pages`: páginas de routing
-- `src/styles`: estilos globales y tokens
-- `src/contexts`: contextos de React (estado global)
-- `vite.config.ts`: configuración de Vite
+## Development workflow
 
-## Variables de entorno
+Feature work can be developed on dedicated branches and reviewed through pull requests before merging into `main`.
 
-Actualmente no son requeridas para desarrollo local. Si se agregan servicios externos, definir `.env` y documentar las claves.
+```bash
+git checkout -b feature/feature-name
+# make changes
+git add -A
+git commit -m "feat: describe the change"
+git push -u origin feature/feature-name
+```
 
-## Colaboración
+## Design origin
 
-- Solicitar acceso como Collaborator a `Settings > Collaborators` del repo
-- Seguir el flujo de ramas y PRs descrito arriba
+The application was developed from a Figma design and translated into a working React/Vite frontend.
 
+## Why it matters in my portfolio
+
+This project demonstrates my ability to take a business-facing design and turn it into an organized frontend codebase. It complements my more application- and data-oriented projects by showing UI implementation, component architecture, routing, responsive design, and business communication through software.
+
+---
+
+**Jesús Zambrano**  
+B.S. Computer Science Candidate — University of North Texas, Fall 2026  
+Software Engineering · Frontend Development · Product Engineering
